@@ -102,7 +102,7 @@ router.post('/search' ,async (req,res)=> {
         let acc = await accountModel.findByID(req.session.passport.user.id);
         if (acc.expiredPre && acc.expiredPre > Date.now()) {
             const listSearch = await articleModels.fullTextSearchPre(search);
-            res.render(`general/Search`, {
+            res.render(`../views/general/search`, {
                 listSearch,
                 empty_listSearch : listSearch === 0, 
                 list_cateParent,
@@ -114,7 +114,7 @@ router.post('/search' ,async (req,res)=> {
       }
 
     const listSearch = await articleModels.fullTextSearch(search);
-    res.render(`general/Search`, {
+    res.render(`../views/general/search`, {
        listSearch,
        empty_listSearch : listSearch === 0, 
        list_cateParent,
