@@ -16,7 +16,7 @@ router.get(`/draft`, async (req, res) => {
        x.post_time = offical_time
     })
 
-    res.render(`editor/list_draft`, {
+    res.render(`../views/editor/list_draft`, {
         article_draft,
         empty: article_draft.length == 0,
         layout : 'main'
@@ -51,7 +51,7 @@ router.get(`/draft/read`, async (req, res) => {
     const offical_time = moment(article.datetime.toLocaleDateString(), `MM/DD/YYYY`).format(`DD-MM-YYYY`);
     article.post_time = offical_time
 
-    res.render(`editor/read`, {
+    res.render(`../views/editor/read`, {
         article,
         listCat,
         tagList,

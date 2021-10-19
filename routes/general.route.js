@@ -42,7 +42,7 @@ router.get(`/`, async (req, res) => {
             var list_topNewEachCate = await articleModel.topNewEachCatePre();
             var list_topNewEachCate1 = list_topNewEachCate.slice(0, 5);
             var list_topNewEachCate2 = list_topNewEachCate.slice(5, 10);
-            res.render(`general/article`, {
+            res.render(`../views/general/article`, {
                 list_newArt,
                 list_highlightsArt,
                 list_topViewEachCate,
@@ -65,7 +65,7 @@ router.get(`/`, async (req, res) => {
     var list_topNewEachCate = await articleModel.topNewEachCate();
     var list_topNewEachCate1 = list_topNewEachCate.slice(0, 5);
     var list_topNewEachCate2 = list_topNewEachCate.slice(5, 10);
-    res.render(`general/article`, {
+    res.render(`../views/general/article`, {
         list_newArt,
         list_highlightsArt,
         list_topViewEachCate,
@@ -141,7 +141,7 @@ router.get('/search/tag/:idTag' ,async (req,res)=> {
       let acc = await accountModel.findByID(req.session.passport.user.id);
       if (acc.expiredPre && acc.expiredPre > Date.now()) {
         var listArtByIDTag = await articleModel.findByIDTagPre(+req.params.idTag);
-        res.render(`general/Search`, {
+        res.render(`../views/general/search`, {
           listSearch: listArtByIDTag,
           empty_listSearch: listArtByIDTag === 0,
           list_cateParent,
@@ -153,7 +153,7 @@ router.get('/search/tag/:idTag' ,async (req,res)=> {
     }
 
     var listArtByIDTag = await articleModel.findByIDTag(+req.params.idTag);
-    res.render(`general/Search`, {
+    res.render(`../views/general/Search`, {
        listSearch : listArtByIDTag,
        empty_listSearch : listArtByIDTag === 0, 
        list_cateParent,
@@ -264,7 +264,7 @@ router.get("/ListArt/:IDCat", async (req, res) => {
     };
     page_items.push(item);
   }
-  res.render(`general/ListArt`, {
+  res.render(`../views/general/ListArt`, {
     lisArtByIdCat,
     empty_listArtByCat: lisArtByIdCat === 0,
     page_items,
@@ -318,7 +318,7 @@ router.get('/byID/:ID', async function (req, res) {
             let acc = await accountModel.findByID(req.session.passport.user.id)
             if (acc.expiredPre && acc.expiredPre > Date.now())
             {
-                res.render(`general/detail`, {
+                res.render(`../views/general/detail`, {
                     listArtbyID : listArtbyID[0],
                     listAnotherArt,
                     empty_listArtbyID: listArtbyID === 0,
@@ -335,7 +335,7 @@ router.get('/byID/:ID', async function (req, res) {
                 return
             }
         }
-        res.render(`general/detail`, {
+        res.render(`../views/general/detail`, {
             listArtbyID : listArtbyID[0],
             listAnotherArt,
             empty_listArtbyID: listArtbyID === 0,
@@ -352,7 +352,7 @@ router.get('/byID/:ID', async function (req, res) {
     }
     else
     {
-        res.render(`general/detail`, {
+        res.render(`../views/general/detail`, {
             listArtbyID : listArtbyID[0],
             listAnotherArt,
             empty_listArtbyID: listArtbyID === 0,

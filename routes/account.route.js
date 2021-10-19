@@ -14,7 +14,7 @@ const retrictPerLogout = require("../middlewares/perLogout.mdw")
 router.get("/login", retrictPerLogin, function (req, res) {
   var m = req.query.message || "";
   req.session.urlReferer = req.headers.referer || "/";
-  res.render("account/login", { layout: 'notTemplate', message: m});
+  res.render("../views/account/login", { layout: 'notTemplate', message: m});
 });
 
 // router.post('/login', passport.authenticate('local', { successRedirect: '/',
@@ -65,7 +65,7 @@ router.get(
 );
 
 router.get("/register",retrictPerLogin, function (req, res) {
-  res.render("account/register", { layout: 'notTemplate' });
+  res.render("../views/account/register", { layout: 'notTemplate' });
 });
 
 router.post("/register", async function (req, res) {
@@ -93,7 +93,7 @@ router.post("/register", async function (req, res) {
     );
   } catch (err) {
     //Màn hình thông báo lỗi
-    res.render("account/register", {
+    res.render("../views/account/register", {
       layout: 'notTemplate',
       message: "Lỗi hệ thống hãy thử lại",
     });
@@ -116,7 +116,7 @@ router.get("/checkSignIn", async function (req, res) {
 });
 
 router.get("/forgotPassword", function (req, res) {
-  res.render("account/forgotPassword", { layout: 'notTemplate' });
+  res.render("../views/account/forgotPassword", { layout: 'notTemplate' });
 });
 
 router.post("/forgotPassword", async function (req, res) {
@@ -142,7 +142,7 @@ router.get("/checkCode", async function (req, res) {
 });
 
 router.get("/confirmCode", function (req, res) {
-  res.render("account/confirmCode", { layout:'notTemplate' });
+  res.render("../views/account/confirmCode", { layout:'notTemplate' });
 });
 
 router.post("/confirmCode", function (req, res) {
@@ -152,7 +152,7 @@ router.post("/confirmCode", function (req, res) {
 });
 
 router.get("/updatePassword", function (req, res) {
-  res.render("account/updatePassword", { layout:'notTemplate' });
+  res.render("../views/account/updatePassword", { layout:'notTemplate' });
 });
 
 router.post("/updatePassword", async function (req, res) {
@@ -194,7 +194,7 @@ router.get("/profile", restrict, async function (req, res) {
   var isFemale = info.gender == "Nữ";
   var isOther = info.gender == "Khác";
 
-  res.render("account/profile", {
+  res.render("../views/account/profile", {
     layout: 'notTemplate',
     info,
     isWriter: req.session.passport.user.idRole === config.role.idWriter,
@@ -251,7 +251,7 @@ router.post("/profile", async function (req, res) {
   var isFemale = info.gender == "Nữ";
   var isOther = info.gender == "Khác";
 
-  res.render("account/profile", {
+  res.render("../views/account/profile", {
     layout: 'notTemplate',
     info,
     isWriter: req.session.passport.user.idRole === config.role.idWriter,

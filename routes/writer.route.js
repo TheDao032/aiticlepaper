@@ -14,7 +14,7 @@ router.get(`/post_article`, async (req, res) => {
   const listCat = await categoryModel.get_parent_cat();
   const listType_article = await typeModel.all();
 
-  res.render(`writers/post_article`, {
+  res.render(`../views/writers/post_article`, {
     category: listCat,
     type: listType_article,
     layout : 'main'
@@ -112,7 +112,7 @@ router.post(`/post_article`, async (req, res) => {
     const listCat = await categoryModel.get_parent_cat();
     const listType_article = await typeModel.all();
 
-    res.render(`writers/post_article`, {
+    res.render(`../views/writers/post_article`, {
       category: listCat,
       type: listType_article,
       layout : 'main'
@@ -146,7 +146,7 @@ router.get("/editPostArticle/:id", async (req, res) => {
     else x.flag = false;
   });
 
-  res.render(`writers/editPostArticle`, {
+  res.render(`../views/writers/editPostArticle`, {
     category: listCat,
     type: listType_article,
     article: art,
@@ -272,7 +272,7 @@ router.get(`/list_article`, async (req, res) => {
   //         x.editFlag = false;
   // })
 
-  res.render(`writers/list_article`, {
+  res.render(`../views/writers/list_article`, {
     article_list,
     empty: article_list.length == 0,
     layout : 'main',
@@ -315,7 +315,7 @@ router.get(`/list_article/:idStatus`, async (req, res) => {
   //         x.editFlag = false;
   // })
 
-  res.render(`writers/list_article`, {
+  res.render(`../views/writers/list_article`, {
     article_list,
     empty: article_list.length == 0,
     layout : 'main',
@@ -327,7 +327,7 @@ router.get(`/list_article/read`, async (req, res) => {
   const article_list = await articleModel.allDetails();
   const id = +req.query.id || -1;
 
-  res.render(`writers/list_article`, {
+  res.render(`../views/writers/list_article`, {
     article_list,
     empty: article_list.length == 0,
     layout : 'main'

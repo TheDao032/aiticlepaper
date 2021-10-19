@@ -32,7 +32,7 @@ router.get(`/articles`, async (req, res) => {
        x.post_time = offical_time;
     })
 
-    res.render(`admin/article/articles`, {
+    res.render(`../views/admin/article/articles`, {
         article_draft,
         empty: article_draft.length == 0
     });
@@ -42,7 +42,7 @@ router.get(`/post_article`, async (req, res)=>{
   const listCat = await categoryModel.get_parent_cat();
   const listType_article = await typeModel.all();
 
-  res.render(`admin/article/post_article`, {
+  res.render(`../views/admin/article/post_article`, {
     category: listCat,
     type: listType_article,
   });
@@ -175,7 +175,7 @@ router.get("/editPostArticle/:id", async (req, res) => {
     else x.flag = false;
   });
 
-  res.render(`admin/article/editPostArticle`, {
+  res.render(`../views/admin/article/editPostArticle`, {
     category: listCat,
     type: listType_article,
     article: art,
@@ -382,7 +382,7 @@ router.get(`/articles/read`, async (req, res) => {
   const offical_time = moment(article.datetime.toLocaleDateString(), `MM/DD/YYYY`).format(`DD-MM-YYYY`);
   article.post_time = offical_time
 
-  res.render(`admin/article/read`, {
+  res.render(`../views/admin/article/read`, {
       article,
       listCat,
       tagList,
@@ -442,7 +442,7 @@ router.get('/users', async function(req, res) {
       x.flagEditor = false
     }
   })
-  res.render('admin/user/list', {
+  res.render('../views/admin/user/list', {
       users: list,
       empty: list.length === 0,
       // layout: false
@@ -457,7 +457,7 @@ router.get('/users/add', async function(req, res) {
     else
       x.flag = false
   })
-  res.render('admin/user/add', {layout: 'notTemplate', roles});
+  res.render('../views/admin/user/add', {layout: 'notTemplate', roles});
 })
 
 router.post("/users/add", async function (req, res) {
@@ -486,7 +486,7 @@ router.post("/users/add", async function (req, res) {
       if (x.id == config.role.idGuest) x.flag = true;
       else x.flag = false;
     });
-    res.render("admin/user/add", {
+    res.render("../views/admin/user/add", {
       layout: 'notTemplate',
       roles,
       message: "Thêm thành công",
@@ -498,7 +498,7 @@ router.post("/users/add", async function (req, res) {
       else x.flag = false;
     });
     //Màn hình thông báo lỗi
-    res.render("admin/user/add", {
+    res.render("../views/admin/user/add", {
       layout: 'notTemplate',
       message: "Lỗi hệ thống hãy thử lại",
       roles,
@@ -531,7 +531,7 @@ router.get('/users/edit/:username/:idRole/:idAcc', async function(req, res) {
     isExpired = info.expiredPre <= Date.now();
   }
   info.expiredPre = moment(info.expiredPre, "YYYY-MM-DD hh:mm:ss").format("DD-MM-YYYY hh:mm:ss");
-  res.render('admin/user/edit', {layout: 'notTemplate',
+  res.render('../views/admin/user/edit', {layout: 'notTemplate',
     info,
     isWriter : req.params.idRole == config.role.idWriter,
     roles,
@@ -662,7 +662,7 @@ router.get('/editEditor/:id', async function(req, res) {
     });
 
     const user = rows[0];
-    res.render('admin/user/editEditor', { user, category });
+    res.render('../views/admin/user/editEditor', { user, category });
 
 })
 
@@ -696,7 +696,7 @@ router.post('/editEditor', async function(req, res) {
     });
 
     const user = rows[0];
-    res.render('admin/user/editEditor', { user, category, layout : 'main' });
+    res.render('../views/admin/user/editEditor', { user, category, layout : 'main' });
 })
 
 
@@ -704,7 +704,7 @@ router.post('/editEditor', async function(req, res) {
 
 router.get('/tags', async function(req, res) {
   const list = await tagModel.all();
-  res.render('admin/tag/list', {
+  res.render('../views/admin/tag/list', {
       tags: list,
       empty: list.length === 0,
       layout : 'main' 
@@ -712,12 +712,12 @@ router.get('/tags', async function(req, res) {
 })
 
 router.get('/tags/add', function(req, res) {
-  res.render('admin/tag/add', {layout : 'main' });
+  res.render('../views/admin/tag/add', {layout : 'main' });
 })
 
 router.post('/tags/add', async function(req, res) {
   await tagModel.add(req.body);
-  res.render('admin/tag/add',  {layout : 'main' });
+  res.render('../views/admin/tag/add',  {layout : 'main' });
 })
 
 router.get('/tags/edit/:id', async function(req, res) {
@@ -727,7 +727,7 @@ router.get('/tags/edit/:id', async function(req, res) {
       return res.send('Invalid parameter.');
 
   const tag = rows[0];
-  res.render('admin/tag/edit', { tag, layout : 'main' });
+  res.render('../views/admin/tag/edit', { tag, layout : 'main' });
 })
 
 router.get('/tags/del/:id', async function(req, res) {
@@ -758,7 +758,7 @@ router.get('/tags/existTag', async function(req, res) {
 
 router.get('/categories', async function(req, res) {
   const list = await categoryModel.all();
-  res.render('admin/category/list', {
+  res.render('../views/admin/category/list', {
       categories: list,
       empty: list.length === 0,
       layout : 'main'
@@ -768,7 +768,7 @@ router.get('/categories', async function(req, res) {
 router.get('/categories/add', async function(req, res) {
   const categories = await categoryModel.root();
   const idnew = await categoryModel.test();
-  res.render('admin/category/add', {
+  res.render('../views/admin/category/add', {
       categories,
       idnew,
       layout : 'main'
@@ -844,7 +844,7 @@ router.get('/categories/edit/:id', async function(req, res) {
       } else
           x.flag = false
   })
-  res.render('admin/category/edit',
+  res.render('../views/admin/category/edit',
       { category,
         categoriesRoot,
         flagCBB,
