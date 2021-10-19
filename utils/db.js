@@ -1,8 +1,9 @@
 const mysql = require('mysql');
 const config = require('../config/default.json');
+const environment = require('../environments/environment')
 
-console.log('connection string', config.mysqlConnectionString)
-const pool = mysql.createConnection(config.mysqlConnectionString);
+console.log('connection string', environment.mysqlConnectionString)
+const pool = mysql.createConnection(environment.mysqlConnectionString);
 pool.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);

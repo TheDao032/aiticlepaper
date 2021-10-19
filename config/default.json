@@ -1,5 +1,4 @@
 {
-  "mysqlConnectionString": "${process.env.JAWSDB_URL}",
   "mysql": {
     "host": "localhost",
     "port": 3306,
