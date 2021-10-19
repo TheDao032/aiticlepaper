@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const config = require('../config/default.json');
 
+console.log('connection string', config.mysqlConnectionString)
 const pool = mysql.createConnection(config.mysqlConnectionString);
 pool.connect(function(err) {
   if (err) {
