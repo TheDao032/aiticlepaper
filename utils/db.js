@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const config = require('../config/default.json');
 
 const pool = mysql.createConnection(config.mysqlConnectionString);
-connection.connect(function(err) {
+pool.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
     return;
