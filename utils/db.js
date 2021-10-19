@@ -10,7 +10,7 @@ pool.connect(function(err) {
     return;
   }
  
-  console.log('connected as id ' + connection.threadId);
+  console.log('connected as id ' + pool.threadId);
 });
 // const pool = mysql.createPool(config.mysql);
 
