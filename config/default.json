@@ -1,0 +1,56 @@
+{
+  "mysqlConnectionString": "${process.env.JAWSDB_URL}",
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "database": "web2-article",
+    "connectionLimit": 50
+  },
+  "facebook": {
+    "clientID": 648933419028295,
+    "clientSecret": "6f6e421bf05ad6b3cdb7dbc2d3503557",
+    "callbackURL": "http://localhost:3000/account/facebook/callback"
+  },
+  "google": {
+    "clientID": "752012979557-l0fqj7engtus2dh6274ol1k2isnac3s1.apps.googleusercontent.com",
+    "clientSecret": "nqbEM4oezc-Z2hVmK1PEOX2f",
+    "callbackURL": "http://localhost:3000/account/google/callback"
+  },
+  "authentication": {
+    "saltRounds": 8
+  },
+  "helper": {
+    "min": 100000,
+    "max": 999999
+  },
+  "email": {
+    "username": "htdieu1999@gmail.com",
+    "password": "nhomweb2",
+    "fromEmail": "Web2 👻 <htdieu1999@gmail.com>"
+  },
+  "image": {
+    "articleAvatar": "/public/articleAvatar-img/"
+  },
+  "statusArticle": {
+    "isPending": 1,
+    "isWaitingRelease": 2,
+    "rejected": 3,
+    "released": 4
+  },
+  "role": {
+    "idGuest": 1,
+    "idSubscriber": 2,
+    "idWriter": 3,
+    "idEditor": 4,
+    "idAdmin": 5
+  },
+  "TOA": {
+    "idBasic": 1,
+    "idPremium": 2
+  },
+  "pagination": {
+    "limit": 2
+  }
+}

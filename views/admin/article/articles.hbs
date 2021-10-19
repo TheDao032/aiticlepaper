@@ -1,0 +1,75 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+    <link rel="stylesheet" href="/public/css/admin/article/list.css">
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}}
+
+<!-- https://ui-patterns.com/users/1/collections/lists/screenshots/17061
+            https://codepen.io/MPERSIA/pen/LYpKqXX
+            https://github.com/therpraveenkumar/web-development/tree/master/Pencil%20Animation-->
+
+<section class="main_draft main-section" id="draft_list">
+    <div class="title-page">
+        <h2>Bài báo</h2>
+        <div class="empty-div">
+            {{#if this.empty}}
+                <span>Nhấn để thêm bài viết
+                    <i class="far fa-lg fa-hand-point-right"></i>
+                </span>
+            {{/if}}
+        </div>
+        <a role="button" href="/admin/post_article" class="article-add-btn" title="Thêm bài viết">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="extra-div">
+        {{#if this.empty}}
+            <hr>
+            <h6 class="empty">Không có dữ liệu <i class="fas fa-frown"></i></i> </h6>
+        {{else}}
+        <div class="row-list-draft">
+            <ul class="ul_article">
+                    {{#each this.article_draft}}
+                        <li>
+                            <div class="box">
+                                <div class="imgBox">
+                                    <img src="{{image}}" alt="{{title}}">
+                                </div>
+                                <a class="details" href="/admin/articles/read?id={{id}}">Read</a>
+                            </div>
+
+                            <div class="article-div">
+                                <div class="common-infor">
+                                    <span class="time-article">{{post_time}}</span>
+                                    <span class="cat_name">{{CateName}}</span>
+                                </div>
+
+                                <a href="/admin/articles/read?id={{id}}"><h4>{{title}}</h4></a>
+                                <p class="summary">{{synopsis}}</p>
+                            </div>
+                        </li>
+                        <hr>
+                    {{/each}}
+                {{/if}}
+            </ul>
+<!--            <nav>-->
+<!--                <ul class="pagination">-->
+<!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+        </div>
+<!--        <div class="col-right">-->
+
+<!--        </div>-->
+    </div>
+</section>

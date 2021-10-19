@@ -1,0 +1,112 @@
+ <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-header-content d-flex align-items-center justify-content-between">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a id="imglogo" href="/"><img src="/public/images/core-img/logo-33.png" width="200"
+                                        alt=""></a>
+                            </div>
+                            <!-- Login Search Area -->
+                            <div class="login-search-area d-flex align-items-center">
+                                <!-- Login -->
+                                {{#if lcIsAuthenticated}}
+                                <div class="login d-flex">
+                                    <div id="dropdown-user">
+                                        <a href="/account/profile" style="">{{lcAuthUser.username}}!</a>
+                                        <div id="dropdown-content-user">
+                                            <a style="color: black;display: block" href="/account/profile">Thông tin</a>
+                                            {{#if lcSubscriberFlag}}
+                                            {{else}}
+                                            <a style="color: black;display: block" href="/account/permission">Quyền</a>
+                                            {{/if}}
+                                             {{#if lcAllowChangePassword}}
+                                             <a style="color: black;display: block" href="/account/updatePassword">Đổi mật khẩu</a>
+                                        {{/if}}
+                                            {{!-- <a style="color: black;display: block" href="/account/updatePassword">Đổi mật
+                                                khẩu</a> --}}
+                                            <a style="color: black;display: block;" href="/account/logout">Đăng xuất</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{else}}
+                                <div class="login d-flex">
+                                    <a href="/account/login">Đăng nhập</a>
+                                    <a href="/account/register">Đăng ký</a>
+                                </div>
+                                {{/if}}
+                                <!-- Search Form -->
+                                <div class="search-form">
+                                    <form action="/search" method="post">
+                                        <input type="search" name="search" class="form-control" placeholder="Tìm kiếm">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar Area -->
+        <div class="newspaper-main-menu" id="stickyMenu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="newspaperNav">
+    
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="/"><img src="/public/images/core-img/logo-3.png" alt=""></a>
+                        </div>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <!-- Menu -->
+                        <div class="classy-menu d-flex" style="margin-left: 25px;">
+    
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+    
+                            <!-- Nav Start -->
+                            <div class="classynav" style="display: block !important;">
+                                <ul class="justify-content-around">
+                                    {{#if this.empty_cateParent}}
+                                    {{else}}
+                                    {{#each this.list_cateParent}}
+                                    <li><a href="#">{{name}}</a>
+                                        <ul class="dropdown" id="abc">
+                                            {{#each this.list_cateChild}}
+                                            <li><a href="/ListArt/{{id}}">{{name}}</a></li>
+                                            {{/each}}
+                                        </ul>
+                                    </li>
+                                    {{/each}}
+                                    {{/if}}
+                                    <li><a href="#"><i class="fa fa-ellipsis-h fa-lg "></i></a>
+                                        <div class="megamenu">
+                                            {{#each this.list_cateParentAll}}
+                                            <ul class="single-mega cn-col-4">
+                                               <li class="title"><a class="title" href="/ListArt/{{id}}">{{name}}</a></li>
+                                                {{#each this.list_cateChild}}
+                                                <li><a href="/ListArt/{{id}}">{{name}}</a></li>
+                                                {{/each}}
+                                            </ul>
+                                            {{/each}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>

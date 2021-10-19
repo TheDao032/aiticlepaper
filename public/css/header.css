@@ -1,0 +1,120 @@
+*{
+  font-family: "Montserrat";
+  /*border: 1px solid #000;*/
+}
+
+#dropdown-user{
+    position: relative;
+    display: inline-block;
+  }
+  #dropdown-content-user{
+    display: none;
+    position: absolute;
+    background-color: #FCF3CF;
+    min-width: 160px;
+    z-index: 99;
+    height: auto;
+
+  }
+
+  #dropdown-user:hover #dropdown-content-user{
+    display: block;
+  }
+
+  #dropdown-content-user a{
+    padding: 12px 16px;
+  }
+
+  #dropdown-content-user a:hover{
+    background-color: #FCF3CF;
+    color: #544a7d !important;
+  }
+
+/*Menu admin*/
+.div-nav-admin{
+  /*-webkit-transition: all 0.5s ease;*/
+  /*-moz-transition: position 10s;*/
+  /*-ms-transition: position 10s;*/
+  /*-o-transition: position 10s;*/
+  /*transition: all 0.5s ease;*/
+}
+
+
+.nav-admin{
+  /*border-radius: 10px;*/
+  /*border: 1px solid #000;*/
+  width: 40%;
+  position: relative;
+  margin: auto;
+  margin-top: 10px;
+  /*padding: 20px 20px;*/
+}
+  .nav-admin ul.ul-admin{
+    /*border: 1px solid #000;*/
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px 10px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+  }
+    .nav-admin ul.ul-admin li.li-admin{
+      /*border: 1px solid red;*/
+      /*padding: 10px 10px;*/
+      height: 100%;
+
+    }
+      .nav-admin ul.ul-admin li.li-admin a.a-admin{
+        color: #2375D8;
+        border: 1px solid #2c6ed5;
+        padding: 10px 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      .nav-admin ul.ul-admin li.li-admin a.a-admin:hover{
+        background: #2c6ed5;
+        color: #fff;
+        border-radius: 0.2rem;
+      }
+      .nav-admin ul.ul-admin li.active a.active{
+        background: #7F7FD5;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        background-size: 200%;
+        background-position: right;
+        color: #fff;
+      }
+      .nav-admin ul.ul-admin li.active{
+        /*background: rgba(0,105,255,0.5);*/
+      }
+
+
+.stickyAdmin {
+  background: rgba(255,255,255,0.9);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /*border-bottom: 1px solid #000;*/
+  padding: 8px 8px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-bottom: 50px;
+
+  animation: smoothScroll 1s forwards;
+}
+
+@keyframes smoothScroll {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+section.paddingSticky{
+  padding-top: 50px;
+}

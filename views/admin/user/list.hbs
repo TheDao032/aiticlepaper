@@ -1,0 +1,75 @@
+{{#section 'title'}}
+    Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/user/list.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}}
+
+<section class="main-section">
+    <div id="title_user">
+        <h2>Người dùng</h2>
+        <div class="empty-div">
+            {{#if this.empty}}
+                <span>Nhấn để thêm người dùng
+                    <i class="far fa-lg fa-hand-point-right"></i>
+                </span>
+            {{/if}}
+        </div>
+        <a class="user-add-btn" href="/admin/users/add" role="button">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    {{#if this.empty}}
+        <hr>
+        <h6 class="empty">Không có dữ liệu <i class="fas fa-frown"></i></i> </h6>
+    {{else}}
+        <div class="table_header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                    <th class="user_username">Tên đăng nhập</th>
+                    <th class="user_name">Họ tên</th>
+                    <th class="user_gender">G.tính</th>
+                    <th class="user_email">Email</th>
+                    <th class="user_phone">Sđt</th>
+                    <th class="user_role">Vai trò</th>
+                    <th class="user_action"></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="table_content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+        {{#each this.users}}
+            <tr>
+                <td class="user_username">{{username}}</td>
+                <td class="user_name">{{fullName}}</td>
+                <td class="user_gender">{{gender}}</td>
+                <td class="user_email">{{email}}</td>
+                <td class="user_phone">{{phone}}</td>
+                <td class="user_role">{{name}}</td>
+                <td class="user_action">
+                    <a class="btn btn-primary btn-sm" href="/admin/users/edit/{{username}}/{{idRole}}/{{idAcc}}" role="button" title="Edit User">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="/admin/users/delete/{{idAcc}}" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+
+</section>

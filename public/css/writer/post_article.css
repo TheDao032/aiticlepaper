@@ -1,0 +1,147 @@
+/* body{
+    font-family: "Montserrat";
+} */
+/* .card-header{
+    background: #87cefa;
+}
+.logo{
+    border-radius: 10px;
+    display: block;
+    width: 100px;
+    height: 50px;
+}
+.title-in-logo p{
+    font-size: 30px;
+    margin-top: 5px;
+} */
+
+
+
+/*Cột trái cột phải*/
+.col-one{
+    padding: 10px;
+}
+.col-two{
+    padding: 10px;
+}
+
+/*Button add tag*/
+.btn-tag-plus{
+    margin-left: 5px;
+    border-radius: 5px;
+    background: #87cefa;
+}
+.btn-tag-plus:hover{
+    background: #fff;
+    color: #000;
+    border: 1px solid #87cefa;
+}
+
+/*Button see tag*/
+.btn-tag-see{
+    margin-left: 5px;
+    border-radius: 5px;
+    background: #87cefa;
+}
+.btn-tag-see:hover{
+    background: #fff;
+    color: #000;
+    border: 1px solid #87cefa;
+}
+
+/*Div which include all the tag you add*/
+.tag-container{
+    /*border: 1px solid  #dcdcdc;*/
+    /*border-radius: 10px;*/
+
+}
+.tag-name{
+    clear: both;
+    display: inline-block;
+    height: auto;
+    background: #90ee90;
+}
+
+/*div chứa các tag*/
+.box{
+    margin-top: 10px;
+    /*background-color:#fff;*/
+    color:#000;
+    padding-right:12px;
+    padding-bottom:12px;
+    padding-left:12px;
+    border:2px solid #ccc;
+    margin-right: 15px;
+    height: 30px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius:10px;
+    -khtml-border-radius:20px;
+    -moz-box-shadow: 0 1px 5px #333;
+    -webkit-box-shadow: 0 1px 5px #333;
+}
+a.boxclose{
+    float:right;
+    margin-top:-10px;
+    margin-right:-22px;
+    color: #000;
+    /*border: 1px solid #AEAEAE;*/
+    border-radius: 30px;
+    /*background: #000;*/
+    font-size: 15px;
+    font-weight: bold;
+    /*display: inline-block;*/
+    /*line-height: 0px;*/
+    height: 20px;
+    width: 20px;
+    /*padding: 11px 3px;*/
+}
+
+
+/*Tag*/
+#new-tag{
+    border: none;
+    /*display: inline;*/
+    /*font-family: inherit;*/
+    /*font-size: inherit;*/
+    /*padding: 0px;*/
+    font-weight: bold;
+    resize: horizontal;
+    width: 100px;
+    text-align: center;
+    background: #90ee90;
+}
+
+input#title{
+    /*border: 1px solid #000;*/
+}
+
+
+#title_post_article{
+    /*border: 1px solid #000;*/
+    /*margin: 20px 0 10px 0;*/
+    display: flex;
+    padding: 20px 20px 0 20px;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    /*width: 1200px;*/
+}
+#title_post_article .BTL-btn{
+    display: flex;
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #228B22;
+    justify-content: center;
+    align-items: center;
+    color: 	#228B22;
+}
+#title_post_article .BTL-btn:hover{
+    background: #228B22;
+    color: #fff;
+}
+#title_post_article h2{
+    /*border: 1px solid #000;*/
+    flex-basis: 250px;
+    text-align: center;
+}

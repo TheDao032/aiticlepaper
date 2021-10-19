@@ -1,0 +1,37 @@
+<div class="post-details-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-12">
+                <div id="details" class="post-details-content bg-white mb-30 mt-30 p-30 ">
+
+                    <div id="details" class="related-post-area bg-white mb-30 px-30 pt-30 box-shadow">
+
+                        <div class="section-heading">
+                            <h5>Tìm kiếm bài viết</h5>
+                        </div>
+
+                        <div class="row">
+                            {{#if this.empty_listSearch}}
+                            {{else}}
+                            {{#each this.listSearch}}
+                            <div class="col-12 col-md-6 col-lg-4">
+
+                                <div class="single-blog-post style-4 mb-30">
+                                    <div class="post-thumbnail" style="width: 100%;margin-left: 18px;">
+                                        <img src="{{image}}" alt="">
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="/byID/{{id}}" class="post-title">{{title}}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/tag/edit.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+
+    <script>
+      function validate() {
+          return new Promise(function (resolve, reject) {
+            var username = $('#txtname').val();
+            var id = $('#txtid').val()
+            if (username) {
+              $.getJSON(`/admin/tags/existTag?tagName=${username}&tagID=${id}`, function (data) {
+                return resolve(data)
+              })
+            }
+            else {
+              return resolve(false)
+            }
+          })
+        }
+
+      $('#editForm').on('submit', async function (e) {
+          e.preventDefault()
+          if (await validate()) {
+            alert("Thành công")
+            $('#editForm').off('submit').submit()
+            return true
+          }
+          alert("Tên nhãn bị trùng hoặc không được để trống")
+          return false
+        })
+    </script>
+{{/section}}
+
+<section>
+    <div id="title_edit_tag">
+        <a class="BTL-btn" href="/admin/tags" role="button" title="Back to List">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Sửa tag</h2>
+    </div>
+
+    <form method="POST" id="editForm" action="/admin/tags/update">
+        <input type="hidden" id="txtid" name="id" value="{{this.tag.id}}">
+        <div class="tag_name_gr">
+            <p for="txtname">Nhập tên tag mới:</p>
+            <input type="text" id="txtname" name="name" autofocus value="{{this.tag.name}}">
+        </div>
+        <div class="tag_des_gr">
+            <p for="txtdescribe">Nhập mô tả mới cho tag:</p>
+            <input type="text" id="txtdescribe" name="describe" autofocus value="{{this.tag.describe}}">
+        </div>
+
+        <div class="actions">
+            <span>Bạn muốn &nbsp</span>
+            <a class="del-tag-btn" title="Xóa tag" href="/admin/tags/del/{{this.tag.id}}">
+                Xóa tag
+            </a>
+            <span>&nbsp hay &nbsp</span>
+            <button type="submit" class="save-tag-btn" title="Cập nhật">
+                Cập nhật tag
+            </button>
+        </div>
+    </form>
+</section>

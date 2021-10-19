@@ -1,0 +1,651 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+    <link rel="stylesheet" href="/public/css/admin/article/read.css">
+<!--    <link rel="stylesheet" href="/public/css/writer/post_article.css">-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    
+    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    {{!-- Phần này là datetimepicker --}}
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(window).ready(function () {
+            //Nếu vô trang mà trang đó không thể scroll thì 2 nút được kích hoạt
+
+            console.log(`vô đây`)
+            let footer = document.querySelector(`.footer-area`)
+            console.log($(window).scrollTop())
+            console.log($(window).height())
+            console.log(footer.offsetHeight)
+            console.log(`Sum`);
+            console.log($(window).scrollTop() + $(window).height() )
+
+            console.log($(document).height() - footer.offsetHeight)
+            if ($(window).scrollTop() + $(window).height()  >= $(document).height()) {
+                var approve_btn = document.getElementById(`ap-btn`);
+                var reject_btn = document.getElementById(`re-btn`);
+                var edit_btn = document.getElementById(`adEdit-btn`);
+                var del_btn = document.getElementById(`adDel-btn`);
+
+
+                approve_btn.classList.remove(`disabled`);
+                reject_btn.classList.remove(`disabled`);
+                edit_btn.classList.remove(`disabled`);
+                del_btn.classList.remove(`disabled`);
+
+                console.log(`end`)
+            }
+            else {
+                //Nếu trang đó scroll được thì kiểm tra xem 2 cái <a> có class disabled hay k
+                console.log(`alo alo cc`)
+                if ($(`a`).hasClass(`disabled`)) {
+                    //Có thì display của mấy cái đường chạy xung quanh nút là none
+                    $(`.app-span`).css(`display`, `none`);
+                    $(`.re-span`).css(`display`, `none`);
+                }
+            }
+    })
+    </script>
+<!--    Sticky when scroll-->
+<script>
+    // $(window).bind('scroll', function () {
+    //     if ($(window).scrollTop() > 0) {
+    //         $('.div-1').addClass('sticky');
+    //     } else {
+    //         $('.div-1').removeClass('sticky');
+    //     }
+    // });
+
+    window.addEventListener(`scroll`, function () {
+        var stickyNav = document.querySelector(`.div-1`);
+        stickyNav.classList.toggle(`sticky`, window.scrollY > 174);
+    })
+</script>
+<!--Check that user scroll to the end-->
+    <script>
+        console.log(`cc`)
+        $(window).scroll(function () {
+            var footer = document.querySelector(`.footer-area`)
+
+            console.log($(window).scrollTop())
+            console.log($(window).height())
+            console.log(footer.offsetHeight)
+            console.log($(window).scrollTop() + $(window).height() + footer.offsetHeight)
+            console.log($(document).height())
+
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                var approve_btn = document.getElementById(`ap-btn`);
+                var reject_btn = document.getElementById(`re-btn`);
+                var edit_btn = document.getElementById(`adEdit-btn`);
+                var del_btn = document.getElementById(`adDel-btn`);
+
+                approve_btn.classList.remove(`disabled`);
+                reject_btn.classList.remove(`disabled`);
+                edit_btn.classList.remove(`disabled`);
+                del_btn.classList.remove(`disabled`);
+
+            $(`.app-span`).css(`display`, `block`);
+            $(`.re-span`).css(`display`, `block`);
+            console.log(`end dưới`)
+        }
+    });
+    </script>
+<!--    Go to top button-->
+<script>
+    //Get the button
+    var mybutton = document.getElementById("top_btn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        // document.getElementById(`div-1`).scrollTop = 0;
+
+        //Cái này cũng scroll to top được mà k có smooth
+        // document.body.scrollTop = 0;
+        // document.documentElement.scrollTop = 0;
+
+        //Sử dụng cái này thì smooth nè
+        const scrollToTop = () => {
+            const c = document.documentElement.scrollTop || document.body.scrollTop;
+            if (c > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, c - c / 8);
+            }
+        };
+        scrollToTop();
+    }
+</script>
+
+<!--    Popup approve button-->
+<script>
+    $(`#ap-btn, #close-editor-approve`).click(function () {
+        var blur1 = document.getElementById('blur1');
+        blur1.classList.toggle('active')
+
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active')
+
+        var popup_approve = document.getElementById('popup-approve');
+        popup_approve.classList.toggle('active')
+
+
+    })
+
+    $(`#re-btn, #close-editor-reject`).click(function () {
+        var blur1 = document.getElementById('blur1');
+        blur1.classList.toggle('active')
+
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active')
+
+
+        var popup_reject = document.getElementById('popup-reject');
+        popup_reject.classList.toggle('active')
+
+        $(`#txtReason`).val(``);
+    })
+</script>
+
+<script>
+    $(`#close-editor-approve`).click(function () {
+        window.close()
+    })
+</script>
+
+<script>
+    //Mảng chứa tất cả các tag đã thêm
+    var tag_content_arr = [];
+
+    $(document).ready(function () {
+        //Thêm tag -- Done
+        $(`#btn-tag-plus`).on("click", function () {
+            //Chưa nhập mà ấn nút thêm
+            if ($(`#input-tag`).val().length == 0) {
+                var timer;
+                var self = $(`#input-tag`);
+                self.css({
+                    "border": "3px solid #E53935",
+                    "border-radius": "25px"
+                });
+
+                timer = setTimeout(function () {
+                    self.css({
+                        "border": "1px solid #87cefa",
+                        "border-radius": "0px"
+                    });
+                }, 400);
+            }
+            else {
+                //Gán biến input_tag là text của cái input mình mới nhập
+                var input_tag = $(`#input-tag`).val().trim();
+                var hasSpace = /\s/g.test(input_tag);
+
+
+                //tag_name_html là cái div lúc thêm thì nó sẽ thêm vô
+                var tag_name_html = "<div class=\"tag-name box\" id=\"" + input_tag + "\"  style=\"text-align: center\">" +
+                    "<a class=\"boxclose\" id=\"" + input_tag + "\"  type='button' onclick=\"delClick(this.id)\">" +
+                    "<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>" +
+                    "</a>" +
+                    "<input id=\"new-tag\" name =\"tag\" value=\"" + input_tag + "\"  readonly=\"readonly\" " +
+                    "maxlength=\"15\">" +
+                    "</div>"
+
+                //Tính số tag đã có
+                var matched = $(`.tag-container div`);
+
+                //Kiểm tra coi có tag nào chưa
+                //Nếu chưa có tag nào thì thêm thoải mái
+                if (matched.length == 0) {
+                    if (/^[a-zA-Z0-9- ]*$/.test(input_tag) == false) {
+                        console.log(`Co dau`)
+                    }
+                    else {
+                        if (hasSpace) {
+                            console.log(`co khoang trang`);
+                        }
+                        else {
+                            $(`.tag-container`).html("<p id='p-tag'><b>Nhãn:</b></p>").appendTo(`.tag-container`);
+                            $(`.tag-container`).add(tag_name_html).appendTo(`.tag-container`);
+
+                            tag_content_arr.push(input_tag);
+
+                            /*Sau khi add tag thì clear khung input*/
+                            $(`#input-tag`).val("");
+
+                            //Sau khi thêm tự động mở tag list
+                            $(`#tag-container`).collapse({
+                                toggle: 'true'
+                            })
+                        }
+                    }
+                }
+
+                //Nếu đã có tag rồi thì phải kiểm tra tag mình tính thêm có trùng với các tag trước hay không
+                else {
+                    //Nếu nhiều hơn 5 tag thì báo lỗi
+                    if (matched.length >= 5) {
+                        $('#myModal').modal('toggle');
+                        $('#myModal').modal('show');
+                        $('#myModal').modal('hide');
+                        $(`#modal-text`).text(`Too much tag !!`)
+                        $(`#input-tag`).val("");
+                    }
+                    else {
+                        //Nếu cái tag chuẩn bị thêm chưa có thì mới thêm
+                        if (/^[a-zA-Z0-9- ]*$/.test(input_tag) == false) {
+                            console.log(`Co dau`)
+                        }
+                        else {
+                            if (hasSpace) {
+                                console.log(`co dau`);
+                            }
+                            else {
+                                if (tag_content_arr.indexOf(input_tag) === -1) {
+                                    $(`.tag-container`).add(tag_name_html).appendTo(`.tag-container`);
+
+                                    tag_content_arr.push(input_tag);
+
+                                    $(`#input-tag`).val("");
+                                }
+                                //Có rồi thì không thêm nữa
+                                else {
+                                    $('#myModal').modal('toggle');
+                                    $('#myModal').modal('show');
+                                    $('#myModal').modal('hide');
+                                    $(`#modal-text`).text(`Tag already exists`)
+                                    $(`#input-tag`).val("");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        //Xem list tag -- Done
+        $(`#btn-tag-see`).click(function () {
+            console.log(`vo day`);
+            var matched = $(`.tag-container div`);
+            console.log(matched.length)
+            if (matched.length == 0) {
+                $('#myModal').modal('toggle');
+                $('#myModal').modal('show');
+                $('#myModal').modal('hide')
+                $(`#modal-text`).text(`Chưa có tag nào để xem`)
+            }
+        })
+    })
+
+    //Hàm xóa phần tử khỏi mảng
+    function removeA(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax = arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
+
+    function arrayRemove(arr, value) {
+        return arr.filter(function (ele) {
+            return ele != value;
+        });
+    }
+
+    //index là tham số truyền vào (là id của cái mình mới click)
+    //Tương ứng với index ở trong mảng tag
+    function delClick(name) {
+        var remove_tag = document.getElementById(name);
+        tag_content_arr = arrayRemove(tag_content_arr, name);
+        remove_tag.remove();
+
+        if (tag_content_arr.length == 0) {
+            var p_tag = document.getElementById(`p-tag`);
+
+            p_tag.remove();
+        }
+    }
+</script>
+
+<script>
+    $(window).on('load', function () {
+        $(`#tag-container`).collapse({
+            toggle: 'true'
+        })
+
+        var inputs = $(".new-tag");
+        for (var i = 0; i < inputs.length; i++) {
+            //alert($(inputs[i]).val());
+            tag_content_arr.push($(inputs[i]).val());
+        }
+    })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+<script>
+    $('#txtPublish').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true
+    });
+</script>
+
+{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+            language: 'vi',
+            format: 'DD/MM/YYYY HH:MM',
+        });
+    });
+</script>
+
+<script>
+
+    function strToDate(dtStr) {
+        let dateParts = dtStr.split("/");
+        let timeParts = dateParts[2].split(" ")[1].split(":");
+        dateParts[2] = dateParts[2].split(" ")[0];
+        // month is 0-based, that's why we need dataParts[1] - 1
+        return dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], timeParts[0], timeParts[1]);
+    }
+
+    function validateTag() {
+        var countChild = document.getElementById("tag-container").childElementCount;
+        if (countChild < 2)
+            return false
+        return true
+    }
+
+    function validateReleaseTime() {
+        var dob = $('#releaseTime').val();
+        console.log("dob", dob)
+        var vnf_regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4} (20|21|22|23|[0-1]?\d):[0-5]?\d$/;
+        if (dob !== '') {
+            if (vnf_regex.test(dob) === false) {
+                //$('#js-message-DOB').text('Ngày sinh không đúng định dạng')
+                //$('#js-message-DOB').prop('style', 'display: block');
+                //$('#DOBSpan').css("color","#cc0033")
+                //$('#DOB').css("border-bottom","3px solid #cc0033");
+                return false
+            }
+            else {
+                var date = new strToDate(dob)
+                var curDate = new Date()
+                if (date.getTime() >= curDate.getTime()) {
+                    //$('#DOBSpan').css("color","black")
+                    // $('#DOB').css("border-bottom","1px solid #AAA");
+                    //$('#js-message-DOB').prop('style', 'display: none');
+                    return true
+                }
+                else {
+                    //$('#js-message-DOB').text('Bạn còn quá nhỏ')
+                    //$('#js-message-DOB').prop('style', 'display: block');
+                    //$('#DOBSpan').css("color","#cc0033")
+                    //$('#DOB').css("border-bottom","3px solid #cc0033");
+
+                    return false
+                }
+            }
+        }
+        else {
+            //$('#js-message-DOB').prop('style', 'display: none');
+            return false
+        }
+    }
+
+    $('#approve-form').on('submit', function (e) {
+        e.preventDefault()
+        if (validateTag() && validateReleaseTime()) {
+            alert("Đã duyệt")
+            $('#approve-form').off('submit').submit()
+            return true
+        }
+        alert("Hãy nhập thông tin đầy đủ và hợp lệ")
+        return false
+    })
+
+</script>
+
+<script>
+    // function validateReason() {
+    //     var reason = $('#txtReason').val();
+    //     if (reason !== '') {
+    //         return true
+    //     }
+    //     else {
+    //         return false
+    //     })
+        function validateReason() {
+            var reason = $(`#txtReason`).val();
+            if (reason != ''){
+                return true
+            }
+            else {
+                return false;
+            }
+        }
+</script>
+    <script>
+        $(document).ready(function() {
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+        })
+    </script>
+    <script>
+    $('#reject-form').on('submit', function (e) {
+        e.preventDefault()
+        if (validateReason()) {
+            alert("Đã từ chối")
+            $('#reject-form').off('submit').submit()
+            return true
+        }
+        alert("Hãy nhập thông tin đầy đủ và hợp lệ")
+        return false
+    })
+</script>
+
+<script>
+    $(window).ready(function () {
+        document.getElementById("nav-admin").style.display = 'none';
+        // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+    });
+</script>
+{{/section}}
+
+<div class="container-check" id="blur">
+    <div class="div-1" id="div-1">
+        <div class="inside-div-1.2">
+            <a class="BTL-btn" href="/admin/articles" role="button" title="Back to List">
+                <i class="fas fa-arrow-left"></i>
+
+            </a>
+            <span class="time-check">Ngày đăng: {{this.article.post_time}}</span>
+            {{!-- <span class="id-check">ID's article: {{this.article.id}}</span> --}}
+            <span class="cat-check">Chuyên mục: {{this.article.nameCat}}</span>
+        </div>
+        <div class="inside-div-1 justify-content-between">
+            <a class="approve-btn" href="/admin/editPostArticle/{{this.article.id}}">
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                Sửa
+            </a>
+
+            <a class="reject-btn disabled" id="adDel-btn" href="/admin/articles/read/delete/{{this.article.id}}">
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                Xóa
+            </a>
+    {{#if this.article.popUpFlag}}
+            <a class="approve-btn disabled" id="ap-btn">
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                <span class="app-span"></span>
+                Duyệt
+            </a>
+            <a class="reject-btn disabled" id="re-btn">
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                <span class="re-span"></span>
+                Từ chối
+            </a>
+    {{else}}
+        <a  id="ap-btn">
+        </a>
+        <a id="re-btn"
+        </a>
+
+    {{/if}}
+</div>
+    </div>
+
+    <div class="container-article-check">
+        <section class="title-check">{{this.article.title}}</section>
+        <section class="content-check">
+            {{{this.article.content}}}
+        </section>
+        <div class="div-tag-check">
+            <h5 class="tagged-topics">Nhãn: </h5>
+
+            {{#each this.tagList}}
+            <p class="tag-check">{{name}}</p>
+            {{/each}}
+        </div>
+
+    </div>
+
+<div>
+    <a onclick="topFunction()" id="top_btn" title="Go to top">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+    </div>
+
+<div id="popup-approve">
+    <form action="/admin/draft/read/approve/{{this.article.id}}" method="POST" class="form-approve" id="approve-form">
+        <div class="div-button">
+            <a name="" id="close-editor-approve" class="close-editor-approve" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+            </a>
+            <button type="submit" class="btn icon-send" id="post-approve">
+                Duyệt
+            </button>
+        </div>
+        <!--        TODO: Chỉnh sửa tag và category, hiệu chỉnh thời gian xuất bản-->
+        <div class="inside-popup">
+            <div class="div-pop-1">
+                <h6 class="card-title">Chuyên mục</h6>
+                <select class="custom-select custom-select-md mb-3" name="category_select" onfocus='this.size=5;'
+                    onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    {{!-- <option value="{{this.article.id}}">{{this.article.catName}}</option> --}}
+                    {{#if this.listCat}}
+                    {{#each this.listCat}}
+                    <option {{#if flag}} selected {{/if}} value="{{id}}">{{name}}</option>
+                    {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+
+            <div class class="div-pop-2">
+                <h6 class="card-title">Ngày xuất bản</h6>
+                {{!-- <input type="text" class="form-control" id="txtPublish" name="Publish"> --}}
+            </div>
+
+            {{!-- datetime --}}
+            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                <input type="text" name="releaseTime" id="releaseTime" class="form-control datetimepicker-input"
+                    data-target="#datetimepicker2" />
+                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+
+            <div class="div-pop-3">
+                <h6 class="card-title">Nhãn</h6>
+
+                <div class="tag-pop">
+                    <input type="text" class="form-control" id="input-tag" name="tag" maxlength="20"
+                        placeholder="Hãy thêm tag ở đây">
+                    <a class="btn btn-tag-see" href="#tag-container" type="button" id="btn-tag-see"
+                        aria-expanded="false" aria-controls="tag-container" data-toggle="collapse" title="Tag list">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn  btn-tag-plus" id="btn-tag-plus" type="button" title="Add tag">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tag-container collapse" id="tag-container">
+            <p id='p-tag'><b>Nhãn:</b></p>
+
+            {{#each this.tagList}}
+            <div class="tag-name box" id="{{name}}" style="text-align: center;">
+                <a class="boxclose" id="{{name}}" type="button" onclick="delClick(this.id)">
+                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                </a>
+                <input id="new-tag" class="new-tag" name="tag" value="{{name}}" readonly="readonly" maxlength="15">
+            </div>
+            {{/each}}
+        </div>
+
+
+    </form>
+</div>
+
+<div id="popup-reject">
+    <form action="/admin/draft/read/reject/{{this.article.id}}" method="POST" class="form-reject" id="reject-form">
+        <div class="div-button">
+            <a name="" id="close-editor-reject" class="close-editor-reject" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+            </a>
+
+            <button type="submit" class="btn icon-send" id="post-approve">
+                Duyệt
+            </button>
+        </div>
+    </form>
+
+    <div class="div-reason">
+        <h5>Lý do từ chối</h5>
+        <textarea name="reason" class="form-control" form="reject-form" name="reason" id="txtReason" cols="69" rows="4"
+            placeholder="Tại sao bạn từ chối bài viết này?">
+
+        </textarea>
+    </div>
+</div>

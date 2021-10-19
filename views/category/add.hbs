@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <h4>New Category</h4>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="">
+      <div class="form-group">
+        <label for="txtCatName">Category</label>
+        <input type="text" class="form-control" id="txtCatName" name="CatName" autofocus>        
+      
+      <div class="input-group">
+        <div class="rs-select2 js-select-simple select--no-search">
+          <span>Root Category</span>
+            <select name="name">
+              <option value="None" selected="selected">None</option>
+              <option value={{name}}>{name}</option>
+            </select>
+            <div class="select-dropdown"></div>
+            </div>
+        </div>
+      </div>
+      
+      <a class="btn btn-success" href="/admin/categories" role="button" title="Back to List">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+      </a>
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>

@@ -1,0 +1,50 @@
+{{#section 'title'}}
+    Xác nhận mã code
+{{/section}}
+
+{{#section 'css'}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/public/css/account/confirmCode.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src="/public/js/confirmCode.js"></script>
+{{/section}}
+
+<div class="backward">
+    <a href="javascript:history.back()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+</div>
+
+<div id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <!--Body-->
+            <div class="modal-body mx-4">
+                <input id="js-message-confirmCode" disabled type="hidden" class="validate alert-danger alert">
+                <form method="POST" id="frmConfirmCode" action="">
+                    <div class="md-form mb-4">
+                        <label data-error="wrong" data-success="right" for="Form-username">Kiểm tra mã OTP trong email
+                            của bạn. Mã này gồm 6 số.</label>
+                        <input type="text" name="code" id="code" placeholder="Nhập mã" class="form-control validate">
+                        <input id="js-message-code" disabled type="hidden" class="alert-danger alert">
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn blue-gradient  btn-block z-depth-1a" id="a">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

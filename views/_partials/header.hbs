@@ -1,0 +1,86 @@
+<!--    Của đạo
+        PreLoader-->
+<div class="preLoader">
+    <div class="pencil">
+        <div class="pencil-eraser"></div>
+    </div>
+    <div class="line"></div>
+    <p>The page is loading ... please wait.</p>
+</div>
+<!--    Của đạo...-->
+<header class="header-area" id="blur1">
+    <!-- Top Header Area -->
+    <div class="top-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="top-header-content d-flex align-items-center justify-content-between">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a id="imglogo" href="/"><img src="/public/images/core-img/logo-33.png" width="200" alt=""></a>
+                        </div>
+                        <!-- Login Search Area -->
+                        <div class="login-search-area d-flex align-items-center">
+                            <!-- Login -->
+                        {{#if lcIsAuthenticated}}
+                            <div class="login d-flex">
+                                <div id="dropdown-user">                               
+                                    <a href="/account/profile" style="" >{{lcAuthUser.username}}!</a>
+                                    <div id="dropdown-content-user">
+                                        <a style="color: black;display: block" href="/account/profile">Thông tin</a>
+                                        {{#if lcSubscriberFlag}}       
+                                        {{else}}
+                                        <a style="color: black;display: block" href="/account/permission">Quyền</a>
+                                        {{/if}}
+                                        {{#if lcAllowChangePassword}}
+                                             <a style="color: black;display: block" href="/account/updatePassword">Đổi mật khẩu</a>
+                                        {{/if}}
+                                        <a style="color: black;display: block;" href="/account/logout">Đăng xuất</a>    
+                                    </div>
+                                </div>
+                            </div>
+                        {{else}}
+                         <div class="login d-flex">
+                                <a href="/account/login" >Đăng nhập</a>
+                                <a href="/account/register">Đăng ký</a>
+                            </div>
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    Menu nav admin-->
+    {{#if lcIsAuthenticated}}
+    {{#if lcAdministratorFlag}}
+        <div class="div-nav-admin" id="div-nav-admin">
+            <nav class="nav-admin" id="nav-admin">
+                <ul class="ul-admin">
+                    <li class="li-admin">
+                        <a href="/" class="a-admin">
+                            Home
+                        </a>
+                    </li>
+                    <li class="li-admin">
+                        <a href="/admin/users" class="a-admin">Người dùng</a>
+                    </li>
+                    <li class="li-admin">
+                        <a href="/admin/articles" class="a-admin">Bài báo</a>
+                    </li>
+                    <li class="li-admin">
+                        <a href="/admin/categories" class="a-admin">Chuyên mục</a>
+                    </li>
+                    <li class="li-admin">
+                        <a href="/admin/tags" class="a-admin">Nhãn</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    {{/if}}
+    {{/if}}
+     {{!-- Thanh menu quyền --}}
+   
+</header>
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <title>ADĐH - {{{_sections.title}}}</title>
+    <link rel="icon" href="/public/images/core-img/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap" rel="stylesheet">
+    {{{_sections.css}}}
+</head>
+
+<body>
+    {{{body}}}
+    {{{_sections.js}}}
+    <script>
+        $(window).on('load', function () {
+            //Đổi 2 cái này với nhau để xem hiệu ứng hi
+            $('.preLoader').addClass('complete');
+            // $(`.preLoader`).fadeOut(500);
+        })
+    </script>
+</body>
+
+</html>

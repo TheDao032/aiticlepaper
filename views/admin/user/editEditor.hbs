@@ -1,0 +1,61 @@
+{{#section 'title'}}
+    Quản trị viên
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/user/editEditor.css">
+{{/section}}
+
+<section class="main-section">
+    <div id="title_edit_editor">
+        <a class="BTL-btn" href="/admin/users" role="button" title="Quay lại">
+            <i class="fas fa-arrow-left"></i>
+
+        </a>
+        <h2>Phân công chuyên mục</h2>
+    </div>
+    <hr>
+
+    <form method="POST" action="/admin/editEditor">
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="txtid" name="id" readonly value="{{this.user.id}}">
+        </div>
+
+        <div class="div-editorName">
+            <span for="txtname">Họ tên: </span>
+            <input type="text" class="editor-name" id="txtname" name="name" readonly
+                   value="{{this.user.fullName}}">
+        </div>
+
+        <div class="cat-for-editor">
+            <h4 for="cbcategory">Chuyên mục:</h4>
+            <div class="checkbox-cat">
+                {{#each this.category}}
+                    <label class="container">
+                        <input {{#if flag}}checked{{/if}} name="checkbox" value="{{id}}" type="checkbox">
+                        <span>{{name}}</span>
+                    </label>
+                {{/each}}
+            </div>
+        </div>
+
+
+        <button type="submit" class="save-profile-editor">
+            Lưu thông tin
+        </button>
+    </form>
+</section>

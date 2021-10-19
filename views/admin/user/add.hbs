@@ -1,0 +1,112 @@
+
+{{#section 'title'}}
+    Quản trị viên
+{{/section}}
+
+
+{{#section 'css'}}
+<link href="/public/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="/public/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<!-- Font special for pages-->
+<!-- Vendor CSS-->
+<link href="/public/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="/public/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+<!-- Main CSS-->
+<link href="/public/css/register.css" rel="stylesheet" media="all">
+{{/section}}
+
+{{#section 'js'}}
+<script src="/public/vendor/jquery/jquery.min.js"></script>
+<script src="/public/vendor/select2/select2.min.js"></script>
+<script src="/public/vendor/datepicker/moment.min.js"></script>
+<script src="/public/vendor/datepicker/daterangepicker.js"></script>
+<script src="/public/js/register.js"></script>
+{{/section}}
+
+
+<div class="backward">
+    <a href="/admin/users" title="Quay lại">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+</div>
+
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w780">
+        <form method="POST" action="" id="frmRegister">
+            <div class="card card-3">
+                <div class="card-heading">
+                    <h2 class="title">Thêm người dùng</h2>
+                    <input type="hidden" value="{{this.message}}" id="errorMessage">
+                    <div class="input-group">
+                        <span class="span1" id="usernameSpan">Tên đăng nhập</span>
+                        <input id="username" class="input--style-3 js-validation-username" type="text" name="username">
+                        <div id="js-message-username" class="errormess" style="display: none;">.</div>
+                    </div>
+                    <div class="input-group">
+                        <span class="span1" id="PasswordSpan">Mật khẩu</span>
+                        <input id="password" class="input--style-3 js-validation-password" type="password"
+                            name="password">
+                        <div id="js-message-password" class="errormess" style="display: none;">.</div>
+                    </div>
+                    <div class="input-group">
+                        <span class="span1" id="confirmPasswordSpan">Nhập lại mật khẩu</span>
+                        <input id="confirmPassword" class="input--style-3 js-validation-confirmPassword" type="password"
+                            name="confirmPassword">
+                        <div id="js-message-confirmPassword" class="errormess" style="display: none;">.</div>
+                    </div>
+                    <div class="input-group">
+                        <span class="span1" id="emailSpan">Email</span>
+                        <input id="email" class="input--style-3 js-validation-email" type="email" name="email">
+                        <div id="js-message-email" class="errormess" style="display: none;">.</div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <span class="span1">Vai trò</span>
+                            <select name="role">
+                                {{#each this.roles}}
+                                <option {{#if flag}} selected {{/if}} value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="span1">Họ và tên</span>
+                        <input id="fullname" class="input--style-3 js-validation-fullname" type="text" name="fullname">
+                        <div id="js-message-fullname" class="errormess" style="display: none;">.</div>
+
+                    </div>
+                    <div class="input-group">
+                        <span class="span1" id="DOBSpan">Ngày sinh</span>
+                        <input id="DOB" class="input--style-3 js-datepicker js-validation-DOB" type="text" name="DOB">
+                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                        <div id="js-message-DOB" class="errormess" style="display: none;">.</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <span class="span1">Giới tính</span>
+                            <select name="gender">
+                                <option value="Nam" selected="selected">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="span1" id="phoneSpan">Số điện thoại</span>
+                        <input id="phone" class="input--style-3 js-validation-phone" type="number" name="phone">
+                        <div id="js-message-phone" class="errormess" style="display: none;">.</div>
+                    </div>
+                    <div class="p-t-10">
+                        <button class="btn btn--pill btn--green" type="submit">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

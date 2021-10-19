@@ -1,0 +1,165 @@
+{{#section 'title'}}
+    Quản trị viên
+{{/section}}
+
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/account/profile.css">
+    <!-- Icons font CSS-->
+    <link href="/public/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <!-- Vendor CSS-->
+    <link href="/public/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/public/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/public/css/register.css" rel="stylesheet" media="all">
+{{/section}}
+
+{{#section 'js'}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/public/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/vendor/select2/select2.min.js"></script>
+    <script src="/public/vendor/datepicker/moment.min.js"></script>
+    <script src="/public/vendor/datepicker/daterangepicker.js"></script>
+    <script src="/public/js/profile.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/locales/vi.js"></script>
+    <script>
+        var scrImg = $('#srcImg').val()
+        $("#input-id").fileinput({
+            language: "vi",
+            allowedFileExtensions: ['png', 'jpg', 'gif', 'jpeg'],
+            initialPreview: [scrImg],
+            initialPreviewAsData: true,
+            initialPreviewConfig: [
+                { caption: "Hình ảnh" }
+            ]
+        });
+    </script>
+{{/section}}
+
+<div class="backward">
+    <a href="/admin/users" title="Quay lại">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+</div>
+<div>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <form method="POST" action="" id="frmProfile">
+                <div class="card card-3">
+                    <div class="card-heading">
+                        <h2 class="title">THÔNG TIN CỦA BẠN</h2>
+                        <div>
+                        </div>
+                        <div class="input-group">
+                            <span>Tên đăng nhập</span>
+                            <input class="input--style-3" type="text" readonly name="username"
+                                   value="{{this.info.username}}">
+                            <input type="hidden" name="idAcc" value="{{this.info.idAcc}}">
+                            <input class="js-message-username" disabled type="hidden">
+                        </div>
+                        <div class="input-group">
+                            {{#if this.info.isAllowChangePassword}}
+                                <span>Mật khẩu || <a href="/account/updatePassword">Đổi mật khẩu</a></span>
+                            {{else}}
+                                <span>Mật khẩu</span>
+                            {{/if}}
+                            {{!-- <span>Mật khẩu || <a href="/account/updatePassword">Đổi mật khẩu</a></span> --}}
+                            <input class="input--style-3" type="text" name="password" readonly value="******">
+                            <input class="js-message-password" disabled type="hidden">
+                        </div>
+                        <div class="input-group">
+                            <span>Họ và tên</span>
+                            <input class="input--style-3" type="text" id="fullName" name="fullName"
+                                   value="{{this.info.fullName}}">
+                            <input class="js-message-fullname" disabled type="hidden">
+                        </div>
+                        <div class="input-group">
+                            <span>Bút danh</span>
+                            <input class="input--style-3" type="text" name="pseudonym" {{#if this.isWriter}}
+                                   value="{{this.info.pseudonym}}" {{else}} readonly value="Không có bút danh" {{/if}}>
+                            <input class="js-message-pseudonym" disabled type="hidden">
+                        </div>
+                        <div class="input-group">
+                            <span>Email</span>
+                            <input class="input--style-3" type="text" id="email" name="email"
+                                   value="{{this.info.email}}">
+                            <input class="js-message-email" disabled type="hidden">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {{#if this.isSubscriber}}
+                            {{#if this.isNew}}
+                                <div class="premium">
+                                    <div class="infor-premium-1">
+                                        {{!-- <h3>Thông tin premium</h3> --}}
+                                        <button type="submit" formaction="/admin/users/assign" class="btn extend-button">Đăng
+                                            ký</button>
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="premium">
+                                    <div class="infor-premium-1">
+                                        {{!-- <h3>Thông tin premium</h3> --}}
+                                        {{#if isExpired}} <button type="submit" formaction="/admin/users/extend"
+                                                                  class="btn extend-button">Gia hạn</button> {{else}} <h3>GÓI PREMIUM</h3> {{/if}}
+                                    </div>
+                                    <div class="infor-premium-2">
+                                        <input class="time-premium" disabled type="text" id="time-premium"
+                                               value="{{this.info.expiredPre}}">
+                                    </div>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                        {{#if isEditor}}
+                            <div class="premium">
+                                <div class="infor-premium-1">
+                                    {{!-- <h3>Thông tin premium</h3> --}}
+                                    <a href="/admin/editEditor/{{this.info.idAcc}}" style="width: auto;"
+                                       class="btn extend-button">Phân
+                                        công chuyên mục</a>
+                                </div>
+                            </div>
+                        {{/if}}
+                        <h2 class="title" id="opacity">bla bla bla</h2>
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <span class="span1">Vai trò</span>
+                                <select name="role">
+                                    {{#each this.roles}}
+                                        <option {{#if flag}} selected {{/if}} value="{{id}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span>Ngày sinh</span>
+                            <input class="input--style-3 js-datepicker" type="text" id="DOB" name="DOB"
+                                   value="{{this.info.dob}}">
+                            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                            <input class="js-message-DOB" disabled type="hidden">
+                        </div>
+                        <div class="input-group">
+                            <span>Giới tính</span>
+                            <input class="input--style-3" type="text" id="gender" name="gender" readonly
+                                   value="{{this.info.gender}}">
+                        </div>
+                        <div class="input-group">
+                            <span>Số điện thoại</span>
+                            <input class="input--style-3" type="number" id="phone" name="phone"
+                                   value="{{this.info.phone}}">
+                            <input class="js-message-phone" disabled type="hidden">
+                        </div>
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">Lưu</button>
+                        </div>
+                    </div>    
+                </div>
+        </div>
+        </form>
+    </div>
+</div>

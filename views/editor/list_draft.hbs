@@ -1,0 +1,69 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+    <link rel="stylesheet" href="/public/css/editor/list_draft.css">
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}}
+
+<!-- https://ui-patterns.com/users/1/collections/lists/screenshots/17061
+            https://codepen.io/MPERSIA/pen/LYpKqXX
+            https://github.com/therpraveenkumar/web-development/tree/master/Pencil%20Animation-->
+
+<div id="title_editor_list">
+    <a class="BTL-btn" href="/" role="button" title="Back to List">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <h2 class="title-page">Những bài báo chờ duyệt</h2>
+</div>
+<hr>
+<div class="main_draft" id="draft_list">
+
+    <div class="extra-div">
+        <div class="row-list-draft">
+            <ul class="ul_article">
+                {{#if this.empty}}
+                    Không có bài báo nào đang chờ duyệt...
+                {{else}}
+                    {{#each this.article_draft}}
+                        <li>
+                            <div class="box">
+                                <div class="imgBox">
+                                    <img src="{{image}}" alt="{{title}}">
+                                </div>
+                                <a class="details" href="/editor/draft/read?id={{id}}">Read</a>
+                            </div>
+
+                            <div class="article-div">
+                                <div class="common-infor">
+                                    <span class="time-article">{{post_time}}</span>
+                                    <span class="cat_name">{{CateName}}</span>
+                                </div>
+                                <a href="/editor/draft/read?id={{id}}"><h4>{{title}}</h4></a>
+                                <p class="summary">{{synopsis}}</p>
+                            </div>
+                        </li>
+                        <hr>
+                    {{/each}}
+                {{/if}}
+            </ul>
+<!--            <nav>-->
+<!--                <ul class="pagination">-->
+<!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+        </div>
+        <div class="col-right">
+
+        </div>
+    </div>
+
+</div>

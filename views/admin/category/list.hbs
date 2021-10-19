@@ -1,0 +1,64 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/category/list.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}}
+
+
+<section class="main-section">
+    <div id="title_cat">
+        <h2>Chuyên mục</h2>
+        <div class="empty-div">
+            {{#if this.empty}}
+                <span>Nhấn để thêm chuyên mục
+                    <i class="far fa-lg fa-hand-point-right"></i>
+                </span>
+            {{/if}}
+        </div>
+        <a class=" cat_add_btn" href="/admin/categories/add" role="button" title="Thêm chuyên mục">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+    {{#if this.empty}}
+        <hr>
+        <h6 class="empty">Không có dữ liệu <i class="fas fa-frown"></i></i> </h6>
+    {{else}}
+        <div class="table_header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                    <th class="cat_ID">&nbsp;</th>
+                    <th class="cat_name">Tên</th>
+                    <th class="cat_action">&nbsp;</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table_content">
+            <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+        {{#each this.categories}}
+            <tr>
+                <td class="cat_ID">&nbsp;</td>
+                <td class="cat_name">{{name}}</td>
+                <td class="cat_action">
+                    <a class="btn btn-primary btn-sm" href="/admin/categories/edit/{{id}}" role="button" title="Edit Category">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+            </tbody>
+            </table>
+        </div>
+        {{/if}}
+</section>
+
+

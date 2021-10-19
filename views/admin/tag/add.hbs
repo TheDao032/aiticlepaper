@@ -1,0 +1,76 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/tag/add.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+
+    <script>
+      function validate() {
+          return new Promise(function (resolve, reject) {
+            var username = $('#txtTagName').val();
+            if (username) {
+              $.getJSON(`/admin/tags/existNameTag?tagName=${username}`, function (data) {
+                return resolve(data)
+              })
+            }
+            else {
+              return resolve(false)
+            }
+          })
+        }
+
+      $('#addForm').on('submit', async function (e) {
+          e.preventDefault()
+          if (await validate()) {
+            alert("Thành công")
+            $('#addForm').off('submit').submit()
+            return true
+          }
+          alert("Tên nhãn bị trùng hoặc không được để trống")
+          return false
+        })
+    </script>
+{{/section}}
+
+<section>
+    <div id="title_add_tag">
+        <a class="BTL-btn" href="/admin/tags" role="button" title="Back to List">
+            <i class="fas fa-arrow-left"></i>
+
+        </a>
+        <h2>Thêm tag</h2>
+    </div>
+
+    <form method="POST" action="" id="addForm">
+        <div class="tag_name_gr">
+            <p for="txtTagName">Nhập tên nhãn mới:</p>
+            <input type="text" id="txtTagName" name="name" autofocus>
+        </div>
+        <div class="tag_des_gr">
+            <p for="txtTagDes">Nhập mô tả của tag:</p>
+            <input type="text" id="txtTagDes" name="describe">
+        </div>
+        <div class="actions">
+            <button type="submit" class="save-tag-btn">
+                Thêm tag
+            </button>
+        </div>
+
+    </form>
+</section>

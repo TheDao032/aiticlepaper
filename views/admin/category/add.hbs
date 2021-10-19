@@ -1,0 +1,94 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/category/add.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+
+    <script>
+      function validate() {
+          return new Promise(function (resolve, reject) {
+            var username = $('#txtCatName').val();
+            if (username) {
+              $.getJSON(`/admin/categories/existNameCategory?catName=${username}`, function (data) {
+                return resolve(data)
+              })
+            }
+            else {
+              return resolve(false)
+            }
+          })
+        }
+
+      $('#addForm').on('submit', async function (e) {
+          e.preventDefault()
+          if (await validate()) {
+            alert("Thành công")
+            $('#addForm').off('submit').submit()
+            return true
+          }
+          alert("Tên chuyên mục bị trùng hoặc không được để trống")
+          return false
+        })
+    </script>
+{{/section}}
+
+<section>
+    <div id="title_add_cat">
+        <a class="BTL-btn" href="/admin/categories" role="button" title="Back to List">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h2>Thêm chuyên mục</h2>
+    </div>
+
+    <form method="POST" action="" id ="addForm">
+        <div class="rs-select2 js-select-simple select--no-search parent-cat-select">
+            <p>Chọn chuyên mục cha:</p>
+            <select name="idParent" id="root" class="idParent" onchange="rootcategory">
+                {{#each this.idnew}}
+                    <option value="">None</option>
+                {{/each}}
+                {{#each this.categories}}
+                    <option value="{{idParent}}">{{name}}</option>
+                {{/each}}
+            </select>
+            <div class="select-dropdown"></div>
+        </div>
+
+        <p for="txtCatName">Nhập tên chuyên mục mới:</p>
+        <input type="text" id="txtCatName" name="CatName" autofocus>
+
+        <div class="actions">
+            <button type="submit" id="save-btn" class="save-cat-btn">
+                Thêm chuyên mục
+            </button>
+        </div>
+
+    </form>
+
+</section>
+
+
+<!--<div class="card">-->
+<!--  <div class="card-header">-->
+<!--    <h4>Thêm chuyên mục</h4>-->
+<!--  </div>-->
+<!--  <div class="card-body">-->
+
+<!--  </div>-->
+<!--</div>-->

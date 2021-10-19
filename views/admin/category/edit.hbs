@@ -1,0 +1,96 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/category/edit.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+
+    <script>
+      function validate() {
+          return new Promise(function (resolve, reject) {
+            var username = $('#txtCatName').val();
+            var id = $('#txtid').val()
+            if (username) {
+              $.getJSON(`/admin/categories/existCategory?catName=${username}&catID=${id}`, function (data) {
+                return resolve(data)
+              })
+            }
+            else {
+              return resolve(false)
+            }
+          })
+        }
+
+      $('#editForm').on('submit', async function (e) {
+          e.preventDefault()
+          if (await validate()) {
+            alert("Thành công")
+            $('#editForm').off('submit').submit()
+            return true
+          }
+          alert("Tên chuyên mục bị trùng hoặc không được để trống")
+          return false
+        })
+    </script>
+{{/section}}
+
+<section>
+    <div id="title_edit_cat">
+        <a class="BTL-btn" href="/admin/categories" role="button" title="Back to List">
+            <i class="fas fa-arrow-left"></i>
+
+        </a>
+        <h2>Sửa chuyên mục</h2>
+    </div>
+
+    <form method="POST" id="editForm" action="/admin/categories/update">
+        <div class="rs-select2 js-select-simple select--no-search parent-cat-select">
+            {{!-- Ngày mai hỏi diệu tại sao flag chỗ này bị false khi id = idParent --}}
+            {{#if this.flagCBB}}
+                <input name="idParent" value="{{this.category.id}}" type="hidden">
+            {{else}}
+                <p>Chọn chuyên mục cha:</p>
+                <select name="idParent" id="idParent" {{#if this.flagCBB}} disabled {{/if}}  onchange="rootcategory">
+                    {{#each this.categoriesRoot}}
+                        <option {{#if flag}} selected {{/if}}value="{{id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            {{/if}}
+            <div class="select-dropdown"></div>
+        </div>
+
+
+        <p for="txtCatName">Nhập tên chuyên mục mới:</p>
+        <input type="text"  id="txtCatName" name="CatName" autofocus value="{{this.category.name}}">
+        <input name="id" id="txtid"  value="{{this.category.id}}" type="hidden">
+
+        <div class="actions">
+            <span>Bạn muốn &nbsp</span>
+            <a class="del-cat-btn" title="Remove Category" href="/admin/categories/delete/{{this.category.id}}">
+                Xóa chuyên mục
+            </a>
+            <span>&nbsp hay &nbsp</span>
+            <button type="submit" class="save-cat-btn">
+                Cập nhật chuyên mục
+            </button>
+        </div>
+    </form>
+</section>
+
+
+

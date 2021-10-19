@@ -1,0 +1,113 @@
+{{#section 'title'}}
+    - Bài báo của bạn
+{{/section}}
+
+{{#section 'css'}}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+    <link rel="stylesheet" href="../public/css/writer/list_article.css">
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+    function read_more(content, className) {
+        var popup = document.getElementById(`popup`);
+        if (!popup.closed) {
+            id_based_on_class = className.substring(23);
+            const title = document.getElementById('title_' + id_based_on_class).innerHTML;
+            document.getElementById('title_popup').innerHTML = title;
+            document.getElementById('content_popup').innerHTML = content;
+            // totheTop();
+        }
+    }
+
+    function toggle(){
+        var header = document.getElementById('blur1');
+        header.classList.toggle('active')
+
+        var footer = document.getElementById('blur2');
+        footer.classList.toggle('active')
+
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active')
+
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active')
+    }
+    </script>
+
+    <script>
+        function totheTop() {
+            document.getElementById('popup').scrollTop = 0
+            // document.documentElement.scrollTop = 0;
+        }
+
+        function closePopup() {
+          window.close();
+          document.getElementById("content_popup").innerHTML = "";
+          totheTop();
+        }
+    </script>
+
+{{/section}}
+
+<!--https://ui-patterns.com/users/1/collections/lists/screenshots/16490-->
+<div class="list-container" id="blur">
+    <h2 class="title-page">Tất cả bài viết</h2>
+    <a class="btn btn-outline-success" href="/admin" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Nút quay về
+    </a>
+    <div class="row-list-article row">
+
+        {{#if this.empty}}
+            Bạn chưa viết bài báo nào!
+        {{else}}
+
+        {{#each this.article_list}}
+            <div class="col-sm-4 mb-3 box">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5>Trạng thái: </h5>
+                        <p class="status" id="status_{{id}}">{{nameStatus}}</p>
+
+                    </div>
+                    <div class="card-body">
+                        <h5 class="h4-title" id="title_{{id}}">{{title}}</h5>
+                        <span class="card-text span-syn" id="syn_{{id}}">{{synopsis}}</span>
+                    </div>
+                    <div class="card-footer">
+                        {{#if editFlag}}
+                            <a name="" id="" class="btn-block edit-article" href="/writer/editPostArticle/{{id}}" role="button">
+                                <span>Chỉnh sửa</span>
+                            </a>
+                        {{/if}}
+                        <a name="" id="{{content}}" class="btn-block read-article {{id}}" onclick="toggle();read_more(this.id, this.className)" role="button">
+                            <span>Đọc</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</div>
+<div id="popup">
+    <div class="top" id="topArticle">
+        <a name="" id="" class="close-read" onclick="toggle(); closePopup()" role="button">
+<!--            <i class="fa fa-arrow-left" aria-hidden="true"></i>-->
+            <i class="fa fa-backward" aria-hidden="true"></i>
+        </a>
+        <h5 id="title_popup"></h5>
+    </div>
+    <div id="content_popup">
+
+
+    </div>
+
+    <div>
+            <a onclick="totheTop()" class="totheTop-btn" type="button">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
+    </div>
+
+</div>

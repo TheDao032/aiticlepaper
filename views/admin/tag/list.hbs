@@ -1,0 +1,64 @@
+{{#section 'title'}}
+Quản trị viên
+{{/section}}
+
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/admin/tag/list.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'>
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}}
+
+<section class="main-section">
+    <div id="title_tag">
+        <h2>Tag</h2>
+        <div class="empty-div">
+            {{#if this.empty}}
+                <span>Nhấn để thêm tag
+                    <i class="far fa-lg fa-hand-point-right"></i>
+                </span>
+            {{/if}}
+        </div>
+        <a class=" tag_add_btn" href="/admin/tags/add" role="button" title="Thêm tag">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    {{#if this.empty}}
+        <hr>
+        <h6 class="empty">Không có dữ liệu <i class="fas fa-frown"></i></i> </h6>
+    {{else}}
+        <div class="table_header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                   <th class="tag_STT">&nbsp;</th>
+                   <th class="tag_name">Tên nhãn</th>
+                   <th class="tag_des">Mô tả</th>
+                   <th class="tag_action"></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table_content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+            {{#each this.tags}}
+                <tr>
+                    <td class="tag_STT">&nbsp;</td>
+                    <td class="tag_name">{{name}}</td>
+                    <td class="tag_des">{{describe}}</td>
+                    <td class="tag_action">
+                        <a class="btn btn-primary btn-sm" href="/admin/tags/edit/{{id}}" role="button" title="Edit Event">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+</section>

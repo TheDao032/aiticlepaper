@@ -1,0 +1,111 @@
+*{
+    /*border: 1px solid #000;*/
+    padding: 0;
+    margin: 0;
+}
+
+section.main-section{
+    width: 1000px;
+    /*border: 1px solid #000;*/
+    margin: auto;
+    min-height: 500px;
+}
+    section #title_edit_editor{
+        /*border: 1px solid #000;*/
+        margin: 10px 0 10px 0;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: flex-start;
+    }
+        section #title_edit_editor .BTL-btn{
+            display: flex;
+            width: 50px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #228B22;
+            justify-content: center;
+            align-items: center;
+            color: 	#228B22;
+        }
+            section #title_edit_editor .BTL-btn:hover{
+                background: #228B22;
+                color: #fff;
+            }
+        section #title_edit_editor h2{
+            flex-basis: 550px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+form .div-editorName{
+    /*border: 1px solid #000;*/
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+    form .div-editorName span{
+        /*border: 1px solid #000;*/
+        text-align: center;
+        display: flex;
+        align-items: center;
+        width: 100px;
+        justify-content: flex-start;
+    }
+    form .div-editorName .editor-name{
+        border: 1px solid #696969;
+        /*margin: auto;*/
+        background-color: #cccccc;
+        color: #666666;
+        /*font-family: 'Roboto', sans-serif;*/
+        color: #333;
+        font-size: 1rem;
+        padding: 5px 5px;
+        border-radius: 0.2rem;
+        width: 40%;
+        display: block;
+        outline: none;
+    }
+
+form .cat-for-editor{
+    /*border: 1px solid #000;*/
+}
+    form .cat-for-editor h4{
+        text-decoration: underline;
+    }
+    form .cat-for-editor .checkbox-cat{
+        /*border: 1px solid #000;*/
+        display: inline-block;
+    }
+        form .cat-for-editor .checkbox-cat .container{
+            border-radius: 5px;
+            border: 1px solid #000;
+            margin: 10px 10px 10px 0;
+            padding: 10px;
+            width: 200px;
+        }
+            form .cat-for-editor .checkbox-cat .container input[type="checkbox"]{
+                margin-left: 10px;
+                display: inline-block;
+                cursor: pointer;
+            }
+                form .cat-for-editor .checkbox-cat .container input[type="checkbox"]:checked + span {
+                    /*font-style: italic;*/
+                    /*color: red;*/
+                    font-weight: bold;
+                }
+    form .save-profile-editor{
+        padding: 7px 15px;
+        background: #4169E1;
+        border: none;
+        /*margin: auto;*/
+        border-radius: 0.2rem;
+        color: #fff;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        margin-top: 15px;
+    }
+        form .save-profile-editor:hover{
+            color: black;
+        }

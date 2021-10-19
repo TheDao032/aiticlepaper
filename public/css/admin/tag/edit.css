@@ -1,0 +1,102 @@
+body{
+    font-family: "Montserrat";
+    background: #fff;
+}
+
+section{
+    /*border: 1px solid red;*/
+    max-width: 1000px;
+    width: 1000px;
+    height: 500px;
+    margin: auto;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#title_edit_tag{
+    /*border: 1px solid #000;*/
+    margin: 10px 0 10px 0;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+}
+    #title_edit_tag .BTL-btn{
+        display: flex;
+        width: 50px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #228B22;
+        justify-content: center;
+        align-items: center;
+        color: 	#228B22;
+    }
+    #title_edit_tag .BTL-btn:hover{
+        background: #228B22;
+        color: #fff;
+    }
+    #title_edit_tag h2{
+        flex-basis: 200px;
+        text-align: center;
+    }
+
+#editForm{
+    /*border: 1px solid #000;*/
+    }
+    #editForm p{
+        /*border: 1px solid #000;*/
+        text-align: center;
+        font-size: 15px;
+        color: #000;
+        font-weight: 400;
+    }
+    #editForm #txtname, #editForm #txtdescribe{
+        border: 1px solid #696969;
+        margin: auto;
+        /*font-family: 'Roboto', sans-serif;*/
+        color: #333;
+        font-size: 1.2rem;
+        padding: 10px 10px;
+        border-radius: 0.2rem;
+        width: 50%;
+        display: block;
+    }
+    #editForm .actions{
+        display: flex;
+        width: 100%;
+        /*border: 1px solid #000;*/
+        align-items: center;
+        padding: 10px 10px;
+        justify-content: center;
+    }
+    #editForm .actions .save-tag-btn{
+        padding: 7px 15px;
+        background: #4169E1;
+        border: none;
+        border-radius: 0.2rem;
+        color: #fff;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+    }
+    #editForm .actions .save-tag-btn:hover{
+        color: black;
+    }
+    #editForm .actions .del-tag-btn{
+        padding: 10px 15px;
+        background: #fff;
+        border-radius: 0.2rem;
+        border: 1px solid #808080;
+        color: #000;
+        -webkit-font-smoothing: antialiased;
+
+    }
+    #editForm .actions .del-tag-btn:hover{
+        background: #FF0000;
+        color: #fff;
+    }
+    #editForm .actions p{
+        border: 1px solid #000;
+    }
+    #editForm .tag_name_gr{
+        margin-bottom: 10px;
+    }

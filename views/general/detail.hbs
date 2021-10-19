@@ -1,0 +1,561 @@
+{{#section 'css'}}
+<style>
+    body {
+        background-color: #f2f4f5;
+    }
+
+    #details {
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.15) !important;
+        padding: 30px !important;
+    }
+
+
+    #img {
+        src: ;
+    }
+
+    #cmtButton {
+        font-weight: bold;
+        color: white;
+        background: #544a7d;
+
+    }
+
+
+    .section-heading {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        background-color: #f2f4f5;
+        padding: 10px 25px;
+        border-left: 4px solid #544a7d;
+    }
+
+    .post-details-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .post-details-content .post-meta {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 15px;
+    }
+
+    .post-details-content .post-meta a {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #544a7d;
+    }
+
+    .post-details-content .post-meta a:last-child {
+        margin-left: 20px;
+    }
+
+    .post-details-content .post-meta a:last-child::after {
+        content: '/';
+        position: absolute;
+        top: 0;
+        left: -15px;
+        z-index: 1;
+    }
+
+    .post-details-content .post-meta a:hover,
+    .post-details-content .post-meta a:focus {
+        color: #404040;
+    }
+
+    .post-details-content .post-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    @media only screen and (max-width: 767px) {
+        @media only screen and (max-width: 767px) {
+            .section-heading h5 {
+                font-size: 16px;
+            }
+        }
+    }
+</style>
+<style>
+    body {
+        background-color: #f2f4f5;
+    }
+
+    #details {
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.15) !important;
+        padding: 30px !important;
+    }
+
+
+    #img {
+        src: ;
+    }
+
+    #cmtButton {
+        font-weight: bold;
+        color: white;
+        background: #544a7d;
+
+    }
+
+
+    .section-heading {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        background-color: #f2f4f5;
+        padding: 10px 25px;
+        border-left: 4px solid #544a7d;
+    }
+
+    .post-details-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .post-details-content .post-meta {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 15px;
+    }
+
+    .post-details-content .post-meta a {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #544a7d;
+    }
+
+    .post-details-content .post-meta a:last-child {
+        margin-left: 20px;
+    }
+
+    .post-details-content .post-meta a:last-child::after {
+        content: '/';
+        position: absolute;
+        top: 0;
+        left: -15px;
+        z-index: 1;
+    }
+
+    .post-details-content .post-meta a:hover,
+    .post-details-content .post-meta a:focus {
+        color: #404040;
+    }
+
+    .post-details-content .post-title {
+        font-size: 24px;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .post-details-content .post-title {
+            font-size: 20px;
+        }
+    }
+
+    .post-details-content .post-meta-2 {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 15px;
+    }
+
+    .post-details-content .post-meta-2 a {
+        font-size: 14px;
+        color: #777777;
+        margin-right: 20px;
+    }
+
+    .post-details-content .post-meta-2 a:last-child {
+        margin-right: 0;
+    }
+
+    .post-details-content .post-meta-2 a:hover,
+    .post-details-content .post-meta-2 a:focus {
+        color: #544a7d;
+    }
+
+    .post-details-content ul {
+        position: relative;
+        z-index: 1;
+    }
+
+    .post-details-content ul li {
+        color: #777777;
+        margin-bottom: 10px;
+    }
+
+    .post-details-content ul li i {
+        margin-right: 5px;
+    }
+
+
+    .post-author {
+        position: relative;
+        z-index: 1;
+        padding-top: 40px;
+        border-top: 1px solid #ebebeb;
+    }
+
+    .post-author .post-author-thumb {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 80px;
+        flex: 0 0 80px;
+        max-width: 80px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .post-author .post-author-thumb {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 60px;
+            flex: 0 0 60px;
+            max-width: 60px;
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .post-author .post-author-thumb img {
+        border-radius: 50%;
+    }
+
+    .post-author .post-author-desc .author-name {
+        font-size: 16px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .post-author .post-author-desc .author-name {
+            font-size: 14px;
+        }
+    }
+
+    .post-author .post-author-desc p {
+        margin-bottom: 0;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .post-author .post-author-desc p {
+            font-size: 12px;
+        }
+    }
+
+
+    .section-heading {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        background-color: transparent;
+        padding: 10px 25px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .section-heading h5 {
+            font-size: 16px;
+        }
+    }
+
+    .comment_area {
+        border-bottom: 1px solid #ebebeb;
+        padding-bottom: 50px;
+        padding: 30px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .comment_area .comment-content .comment-author {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 70px;
+        flex: 0 0 70px;
+        min-width: 70px;
+        margin-right: 20px;
+        height: 70px;
+        border-radius: 50%;
+    }
+
+    .comment_area .comment-content .comment-author img {
+        border-radius: 50%;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .comment_area .comment-content .comment-author {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 40px;
+            flex: 0 0 40px;
+            min-width: 40px;
+            margin-right: 10px;
+            height: 40px;
+        }
+    }
+
+    .comment_area .comment-content .comment-meta {
+        margin-bottom: 5px;
+    }
+
+    .comment_area .comment-content .comment-meta .comment-date {
+        font-size: 12px;
+        color: #777777;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    .comment_area .comment-content .comment-meta h6 {
+        margin-bottom: 5px;
+    }
+
+    .comment_area .comment-content .comment-meta p {
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .comment_area .single_comment_area {
+        margin-bottom: 30px;
+    }
+
+    .comment_area .single_comment_area:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .comment_area .children .single_comment_area {
+        margin-left: 50px;
+        margin-top: 30px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .comment_area .children .single_comment_area {
+            margin-left: 15px;
+        }
+    }
+
+
+    .section-heading h5 {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        font-size: 20px;
+        line-height: 1;
+        ;
+    }
+
+
+
+    /*Print PDF*/
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        .header-area, .footer-area, .download-pdf{
+            display: none;
+        }
+
+
+        #blog-content * {
+            visibility: visible;
+        }
+
+        #blog-content {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script>
+    function Printf() {
+        var printContents = document.getElementById(`blog-content`).innerHTML;
+
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+<script>
+    $('#message').click(function () {
+        var IDCurrent = $('#idAcc').val()
+        if (!IDCurrent)
+            window.location = "http://localhost:3000/account/login";
+    });
+
+
+
+    $('#cmtForm').on('submit', async function (e) {
+        e.preventDefault()
+        var IDCurrent = $('#idAcc').val()
+        if (IDCurrent)
+            $('#cmtForm').off('submit').submit();
+        else
+            window.location = "http://localhost:3000/account/login";
+    })
+
+</script>
+{{/section}}
+
+
+<div class="post-details-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-12">
+                <div id="details" class="post-details-content bg-white mb-30 mt-30 p-30 ">
+                    {{#if this.isDownload}}
+                        <div class="download-pdf">
+                            <a href="javascript:Printf()" class="btn-download-pdf" id="btn-download-pdf">
+                                <i class="far fa-lg fa-file-pdf"></i>
+                                <span>Download pdf</span>
+                            </a>
+                        </div>
+                    {{/if}}     
+                    <div class="blog-content">
+                        <div class="post-details-area">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-xl-12">
+                                        <div id="details" class="post-details-content bg-white mb-30 mt-30 p-30 ">
+                                            <div class="blog-content" id="blog-content">
+                                                <div class="post-meta">
+                                                    {{#if lcIsAuthenticated}}
+                                                    <input id="idAcc" type="hidden" value="{{lcAuthUser.id}}"></input>
+                                                    {{/if}}
+                                                    {{#if this.empty}}
+                                                    {{else}}
+                                                    <a href="#">{{this.listArtbyID.rT}}</a>
+                                                    <a href="/ListArt/{{this.listArtbyID.idCat}}">{{this.listArtbyID.catName}}</a>
+                                                </div>
+                                                <h4 class="post-title">{{this.listArtbyID.title}}</h4>
+                                                <div>
+                                                    {{#if this.isView}}
+                                                    {{{this.listArtbyID.content}}}
+                                                    <div class="post-meta">
+                                                        {{#each this.tagList}}
+                                                        <a href="/search/tag/{{id}}">{{name}}</a>
+                                                        {{/each}}
+                                                    </div>
+                                                    {{else}}
+                                                    Hãy đăng ký trở thành thành viên vip để đọc bài viết nhé!
+                                                    {{/if}}
+                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/if}} 
+                                        <div id="details" class="related-post-area bg-white mb-30 px-30 pt-30 box-shadow">
+                                            <div class="section-heading">
+                                                <h5>Bài Viết Liên Quan</h5>
+                                            </div>
+                                            <div class="row">
+                                                {{#if this.empty}}
+                                                {{else}}
+                                                {{#each this.listAnotherArt}}
+                                                <div class="col-12 col-md-6 col-lg-4">
+                                                    <div class="single-blog-post style-4 mb-30">
+                                                        <div class="post-thumbnail" style="width: 100%;">
+                                                            <img src="{{image}}" alt="">
+                                                        </div>
+                                                        <div class="post-content">
+                                                            <a href="/byID/{{id}}" class="post-title">{{title}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{/each}}
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                        <div class="comment_area clearfix bg-white mb-30 box-shadow">
+                                            <div class="section-heading">
+                                                <h5>Bình Luận</h5>
+                                            </div>
+                                            <ol>
+                                                {{#if this.empty_listCmt}}
+                                                {{else}}
+                                                {{#each this.listCmt}}
+                                                <li class="single_comment_area">
+                    
+                                                    <div class="comment-content d-flex">
+                    
+                                                        <div class="comment-author">
+                                                            <img src="/public/images/articleAvatar-img/user.jpg">
+                                                        </div>
+                    
+                                                        <div class="comment-meta">
+                    
+                                                            <a href="#" class="comment-date">{{dt}}</a>
+                                                            <h6>{{username}}</h6>
+                                                            <p>{{content}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {{/each}}
+                                                {{/if}}
+                                            </ol>
+                                        </div>
+                                        <div id="details" class="post-a-comment-area bg-white mb-30 p-30 box-shadow clearfix">
+                                            <!-- Section Title -->
+                                            <div class="section-heading">
+                                                <h5>Đăng Bình Luận</h5>
+                                            </div>
+                    
+                                            <div class="contact-form-area">
+                                                <form action="/ByID/{{this.listArtbyID.id}}" method="post" id="cmtForm">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <textarea name="message" class="form-control" id="message" cols="30" rows="10"
+                                                                placeholder="Hãy bình luận ở đây" required></textarea>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button id="cmtButton" class="btn mag-btn mt-30" {{#if this.isView}} {{else}}
+                                                                disabled {{/if}} type="submit">Đăng bình luận</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+
+<section class="mag-posts-area d-flex flex-wrap">
+    <div class="post-sidebar-area left-sidebar mt-30 mb-30 bg-white box-shadow">
+        <!-- Sidebar Widget -->
+        <div class="single-sidebar-widget p-30">
+            <div class="section-heading">
+                <h5>Nổi Bật Nhất</h5>
+            </div>
+
+            {{#if this.empty_hlArt}}
+            {{else}}
+            {{#each this.list_highlightsArt}}
+            <div class="single-blog-post d-flex">
+                <div class="post-thumbnail">
+                    <!-- <img src="https://thumb.ex-cdn.com/EXP/media.nongnghiep.vn/resize/300x180/files/bao_in/2020/06/28/watermark_anh-3-1130_20200623_542-094449.jpeg" alt="">
+                                                 -->
+                    <img src="{{image}}">
+                </div>
+                <div class="post-content">
+                    <a style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;"
+                        href="/byID/{{id}}" class="post-title">{{title}}</a>
+                    <div class="post-meta d-flex justify-content-between">
+                        <a href="#">{{catName}} </a>
+                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>{{rT}}</a>
+                    </div>
+                    <span
+                        style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">{{synopsis}}</span>
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+
+        </div>
+        <div class="trending-now-posts mb-30 p-10">
+            <!-- Section Title -->
+            <div class="section-heading">
+                <h5>Nổi Bật Nhất Mỗi Chuyên Mục<h5>
+            </div>
+            <div class="trending-post-slides owl-carousel">
+                {{#if this.empty_topVEArt}}
+                {{else}}
+                {{#each this.list_topViewEachCate}}
+                <div class="single-trending-post">
+                    <img src="{{image}}" alt="">
+                    <div class="post-content">
+                        <a href="#" class="post-cata" style="font-weight: bold;">{{nameCat}}</a>
+                        <a style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;"
+                            href="/byID/{{id}}" class="post-title">{{title}}</a>
+                    </div>
+                </div>
+
+                {{/each}}
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+    <div class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
+        <!-- Trending Now Posts Area -->
+        <div class="trending-now-posts mb-30">
+            <!-- Section Title -->
+            <div class="section-heading">
+                <h5>Mới Nhất<h5>
+            </div>
+
+            <div class="trending-post-slides owl-carousel">
+                {{#if this.empty_newArt}}
+                {{else}}
+                {{#each this.list_newArt}}
+                <div class="single-trending-post">
+                    <img src="{{image}}" alt="{{title}}">
+                    <div class="post-content">
+                        <a href="#" class="post-cata" style="font-weight: bold;">{{catName}}</a>
+                        <a style=" width: 250px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;"
+                            href="/byID/{{id}}" class="post-title">{{title}}</a>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+
+            </div>
+        </div>
+
+        <div class="feature-video-posts mb-3">
+            <div class="section-heading">
+                <h5>Đang Hot Hơn</h5>
+            </div>
+
+            <div class="featured-video-posts ">
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="featured-video-posts-slide owl-carousel">
+                            {{#if this.empty_tnec1}}
+                            <div class="single--slide">
+                                {{#each this.list_topNewEachCate1}}
+                                <div class="single-blog-post d-flex">
+                                    <div class="post-thumbnail">
+                                        <img src="{{image}}" alt="">
+                                    </div>
+                                    <div class="post-content">
+                                        <a style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;" href="/byID/{{id}}" class="post-title" id="post-title">{{title}}</a>
+                                        <div class="post-meta d-flex justify-content-between">
+                                            <a href="#">{{catName}}</a>
+                                            <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>{{rT}}</a>
+                                        </div>
+                                        <span style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;" >{{synopsis}}</span>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+
+                            {{#if this.empty_tnec2}}
+                            <div class="single--slide">
+                                <!-- Single Blog Post -->
+                                {{#each this.list_topNewEachCate2}}
+                                <div class="single-blog-post d-flex">
+                                    <div class="post-thumbnail">
+                                        <img src="{{image}}" alt="">
+                                    </div>
+                                    <div class="post-content">
+                                        <a href="/byID/{{id}}" class="post-title" id="post-title">{{title}}</a>
+                                        <div class="post-meta d-flex justify-content-between">
+                                            <a href="#">{{catName}}</a>
+                                            <a href="#"><i class="fa fa-clock-o"
+                                                    aria-hidden="true"></i>{{rT}}</a>
+                                        </div>
+                                          <span style=" width: 240px;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;" >{{synopsis}}</span>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            {{/if}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</section>

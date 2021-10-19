@@ -1,0 +1,446 @@
+{{!-- Kêu Đạo chỉ chỗ add để kiểm tra tag không dấu và không dấu cách //Done
+    -   Chỉ cho upload dạng image 25:43s upload mp4//Done
+        Đưa về tiếng việt trong upload image 30:39s
+        xóa nút upload
+    - coi lại con mắt
+--}}
+
+{{#section 'title'}}
+    - Đăng bài báo mới
+{{/section}}
+
+
+{{#section 'js'}}
+    <!--#### File input bootstrap    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/locales/vi.js"></script>
+
+    <script>
+        $("#input-id").fileinput({
+            language: "vi",
+            allowedFileExtensions: ['png', 'jpg', 'gif', 'jpeg'],
+        });
+    </script>
+    <!--#####-->
+
+    <!--#### What you see what you got    -->
+    <script src="https://cdn.tiny.cloud/1/rosiadugtx9fwoaxmc5n0isci99kw21w9bxfn13h31td9ten/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#txtContent',
+            height: 500,
+            plugins: 'paste image link autolink lists table media preview',
+            menubar: false,
+            image_title: true,
+            // enable automatic uploads of images represented by blob or data URIs
+            automatic_uploads: true,
+            images_upload_url: '/admin/uploadImage',
+            // add custom filepicker only to Image dialog
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+
+                if (meta.filetype == 'image') {
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+
+                    input.onchange = function () {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            var id = 'blobid' + (new Date()).getTime();
+                            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                            var base64 = reader.result.split(',')[1];
+                            var blobInfo = blobCache.create(id, file, base64);
+                            blobCache.add(blobInfo);
+
+                            console.log(blobInfo.blobUri())
+                            // call the callback and populate the Title field with the file name
+                            cb(blobInfo.blobUri(), { title: file.name });
+                        };
+                        reader.readAsDataURL(file);
+                    };
+                    input.click();
+                }
+            },
+            audio_template_callback: function (data) {
+                return '<audio controls>' + '\n<source src="' + data.source1 + '"' + (data.source1mime ? ' type="' + data.source1mime + '"' : '') + ' />\n' + '</audio>';
+            },
+            toolbar: [
+                'undo redo | ' +
+                'bold italic underline strikethrough |' +
+                ' numlist bullist |' +
+                ' alignleft aligncenter alignright |' +
+                ' forecolor backcolor |' +
+                ' table link image media |' + 'preview',
+            ],
+            media_live_embeds: true,
+        });
+    </script>
+
+    <script>
+        //Mảng chứa tất cả các tag đã thêm
+        var tag_content_arr = [];
+
+        $(document).ready(function () {
+            //Thêm tag -- Done
+            $(`#btn-tag-plus`).on("click", function () {
+                //Chưa nhập mà ấn nút thêm
+                if ($(`#input-tag`).val().length == 0) {
+                    var timer;
+                    var self = $(`#input-tag`);
+                    self.css({
+                        "border": "3px solid #E53935",
+                        "border-radius": "25px"
+                    });
+
+                    timer = setTimeout(function () {
+                        self.css({
+                            "border": "1px solid #87cefa",
+                            "border-radius": "0px"
+                        });
+                    }, 400);
+                }
+                else {
+                    //Gán biến input_tag là text của cái input mình mới nhập
+                    var input_tag = $(`#input-tag`).val().trim();
+                    var hasSpace = /\s/g.test(input_tag);
+
+
+                    //tag_name_html là cái div lúc thêm thì nó sẽ thêm vô
+                    var tag_name_html = "<div class=\"tag-name box\" id=\"" + input_tag + "\"  style=\"text-align: center\">" +
+                            "<a class=\"boxclose\" id=\"" + input_tag + "\"  type='button' onclick=\"delClick(this.id)\">" +
+                            "<i class=\"fa fa-window-close\" aria-hidden=\"true\"></i>" +
+                            "</a>" +
+                            "<input id=\"new-tag\" name =\"tag\" value=\"" + input_tag + "\"  readonly=\"readonly\" " +
+                            "maxlength=\"15\">" +
+                            "</div>"
+
+                    //Tính số tag đã có
+                    var matched = $(`.tag-container div`);
+
+                    //Kiểm tra coi có tag nào chưa
+                    //Nếu chưa có tag nào thì thêm thoải mái
+                    if (matched.length == 0) {
+                        if (/^[a-zA-Z0-9- ]*$/.test(input_tag) == false) {
+                            console.log(`Co dau`)
+                        }
+                        else {
+                            if (hasSpace) {
+                                console.log(`co khoang trang`);
+                            }
+                            else {
+                                $(`.tag-container`).html("<p id='p-tag'><b>Nhãn:</b></p>").appendTo(`.tag-container`);
+                                $(`.tag-container`).add(tag_name_html).appendTo(`.tag-container`);
+
+                                tag_content_arr.push(input_tag);
+
+                                /*Sau khi add tag thì clear khung input*/
+                                $(`#input-tag`).val("");
+
+                                //Sau khi thêm tự động mở tag list
+                                $(`#tag-container`).collapse({
+                                    toggle: 'true'
+                                })
+
+                            }
+                        }
+                    }
+
+                    //Nếu đã có tag rồi thì phải kiểm tra tag mình tính thêm có trùng với các tag trước hay không
+                    else {
+                        //Nếu nhiều hơn 5 tag thì báo lỗi
+                        if (matched.length >= 5) {
+                            $('#myModal').modal('toggle');
+                            $('#myModal').modal('show');
+                            $('#myModal').modal('hide');
+                            $(`#modal-text`).text(`Too much tag !!`)
+                            $(`#input-tag`).val("");
+                        }
+                        else {
+                            //Nếu cái tag chuẩn bị thêm chưa có thì mới thêm
+                            if (/^[a-zA-Z0-9- ]*$/.test(input_tag) == false) {
+                                console.log(`Co dau`)
+                            }
+                            else {
+                                if (hasSpace) {
+                                    console.log(`co dau`);
+                                }
+                                else {
+                                    if (tag_content_arr.indexOf(input_tag) === -1) {
+                                        $(`.tag-container`).add(tag_name_html).appendTo(`.tag-container`);
+
+                                        tag_content_arr.push(input_tag);
+
+                                        $(`#input-tag`).val("");
+                                    }
+                                    //Có rồi thì không thêm nữa
+                                    else {
+                                        $('#myModal').modal('toggle');
+                                        $('#myModal').modal('show');
+                                        $('#myModal').modal('hide');
+                                        $(`#modal-text`).text(`Tag already exists`)
+                                        $(`#input-tag`).val("");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
+            //Xem list tag -- Done
+            $(`#btn-tag-see`).click(function () {
+                console.log(`vo day`);
+                var matched = $(`.tag-container div`);
+                console.log(matched.length)
+                if (matched.length == 0) {
+                    $('#myModal').modal('toggle');
+                    $('#myModal').modal('show');
+                    $('#myModal').modal('hide')
+                    $(`#modal-text`).text(`Chưa có tag nào để xem`)
+                }
+            })
+        })
+
+        //Hàm xóa phần tử khỏi mảng
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+        //index là tham số truyền vào (là id của cái mình mới click)
+        //Tương ứng với index ở trong mảng tag
+        function delClick(index) {
+            var remove_tag = document.getElementById(index);
+
+            removeA(tag_content_arr, index);
+            remove_tag.remove();
+
+            console.log(tag_content_arr)
+
+            if (tag_content_arr.length == 0) {
+                var p_tag = document.getElementById(`p-tag`);
+
+                p_tag.remove();
+            }
+        }
+    </script>
+
+    <script>
+        function validateTOA() {
+            var idTOA = $('#TOA_select').val();
+            if (idTOA == null)
+                return false
+            return true
+        }
+
+        function validateCat() {
+            var idCat = $('#category_select').val();
+            if (idCat == null)
+                return false
+            return true
+        }
+
+        function validateTag() {
+            var countChild = document.getElementById("tag-container").childElementCount;
+            if (countChild < 2)
+                return false
+            return true
+
+        }
+
+        function validateTitle() {
+            var title = $('#title').val();
+            if (title !== '')
+                return true
+
+            return false
+        }
+
+        function validateSummary() {
+            var summary = $('#summary').val();
+            if (summary !== '')
+                return true
+
+            return false
+        }
+
+        function validateContent() {
+            var txt = tinyMCE.get('txtContent').getContent();
+            if (txt !== '')
+                return true
+            return false
+        }
+
+        $('#frmPostArticle').on('submit', function (e) {
+            e.preventDefault()
+            if (validateTOA() && validateCat() && validateTag() && validateTitle() && validateSummary() && validateContent()) {
+                alert("Đang chờ kiểm duyệt...")
+                $('#frmPostArticle').off('submit').submit()
+                return true
+            }
+            alert("Hãy nhập thông tin và hợp lệ")
+            return false
+        })
+
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            document.getElementById("nav-admin").style.display = 'none';
+            document.getElementById("div-nav-admin").style.display = 'none';
+            //Mai thêm câu này vô mấy trang k dùng menu admin
+
+            // document.getElementById("nav-admin").style.visibility = 'hidden';
+
+        });
+    </script>
+{{/section}}
+
+
+
+{{#section 'css'}}
+    <!--    -->
+    {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> --}}
+
+    <!--#### Icon title bar-->
+    <link rel="shortcut icon" href="../public/images/logo-1-crop.png" type="image/png">
+
+    <!--#### Font-family from Google-->
+    {{!-- <link href="https://fonts.googleapis.com/css?family=Montserrat" rel='stylesheet'> --}}
+
+    <!--#### CSS file-input bootstrap-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all"
+          rel="stylesheet" type="text/css" />
+
+    <!--####CSS file-->
+    <link rel="stylesheet" href="/public/css/admin/article/post_article.css">
+{{/section}}
+
+<div id="title_post_article">
+    <a class="BTL-btn" href="/admin/articles" role="button" title="Back to List">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <h2>Đăng bài viết</h2>
+</div>
+
+
+<div class="container-fluid">
+    <div class="card-body form-group">
+        <form action="" method="post" class="row" id="frmPostArticle" enctype="multipart/form-data">
+            <div class="col-sm-4 col-one">
+                <h4 class="card-title">Loại</h4>
+                <select class="custom-select custom-select-md mb-3" name="TOA_select" id="TOA_select" autofocus>
+                    <option disabled selected hidden>BASIC hoặc PRE?</option>
+                    {{#if this.type}}
+                        {{#each this.type}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+                <br>
+                <br>
+                <h4 class="card-title">Tiêu đề</h4>
+                <input type="text" class="form-control" placeholder="Thêm tiêu đề" name="title" id="title">
+                <br>
+                <h4 class="card-title">Ảnh đại diện</h4>
+                <input id="input-id" type="file" class="file" name="image" data-preview-file-type="text">
+            </div>
+
+            <div class="col col-two">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="card-title">Chuyên mục</h4>
+                        <select class="custom-select custom-select-md mb-3" name="category_select" id="category_select">
+                            <option disabled selected hidden>Chọn chuyên mục</option>
+                            {{#if this.category}}
+                                {{#each this.category}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            {{/if}}
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title">Nhãn</h4>
+                        <div class="row">
+                            <input type="text" class="form-control col-7" id="input-tag" name="tag" maxlength="15"
+                                   placeholder="Hãy thêm tag ở đây">
+                            <a class="btn col-2 btn-tag-see" href="#tag-container" type="button" id="btn-tag-see"
+                               aria-expanded="false" aria-controls="tag-container" data-toggle="collapse"
+                               title="Tag list">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn col-2 btn-tag-plus" id="btn-tag-plus" type="button" title="Add tag">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tag-container collapse" id="tag-container">
+
+                </div>
+                <br>
+                <!--Ấn thêm tag, hiện thêm 1 khung ở dưới chứa những tag đã thêm
+                Link: https://help.mynewsdesk.com/en/how-to/publish-new-press-release-news-article-blog-post/-->
+                <div>
+                    <h4 class="card-title">Nội dung tóm tắt</h4>
+                    <textarea type="text" class="form-control" name="summary" id="summary" cols="30"
+                              rows="1"></textarea>
+                </div>
+                <br>
+                <div>
+                    <h4 class="card-title">Nội dung bài viết</h4>
+                    <textarea class="form-control" name="Content" id="txtContent" cols="30" rows="10"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-success btn-block">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Đăng bài viết
+                </button>
+            </div>
+        </form>
+    </div>
+    {{!-- <div class="card-footer text-muted">
+        Footer
+
+    </div> --}}
+</div>
+
+<!--Modal để hiện lỗi-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <!--            <div class="modal-header">-->
+            <!--                <h4 class="modal-title">Lỗi khi thêm tag</h4>-->
+            <!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            <!--            </div>-->
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"
+                        style="margin-top: -15px; margin-right: -10px">&times;</button>
+                <p id="modal-text"></p>
+            </div>
+
+            <!-- Modal footer -->
+            <!--            <div class="modal-footer">-->
+            <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+            <!--            </div>-->
+
+        </div>
+    </div>
+</div>

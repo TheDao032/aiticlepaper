@@ -1,0 +1,152 @@
+body{
+    background-image: url('/public/images/Digital\ Water.jpg');
+    background-size: cover;
+    display: flex;
+}
+
+#elegantModalForm{
+    /*border: 1px solid #000;*/
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    /*transform: translate(50%,50%);*/
+    position: relative;
+}
+
+div.modal-header{
+    /*border: 1px solid red;*/
+    position: relative;
+    height: 70px;
+    top: 0;
+}
+
+div .logo-forgot{
+    /*border: 1px solid #000;*/
+    position: absolute;
+    transform: translateX(45%);
+    /*transform: translateY(0);*/
+    /*bottom: 0;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+    left: 0;
+    top: 10%;
+    height: 50px;
+    width: 200px;
+}
+
+div.modal-header label{
+    position: absolute;
+    /*transform: translateX(100%);*/
+
+    bottom: 0;
+    /*border: 1px solid;*/
+
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    letter-spacing: 2px;
+}
+
+/*Xong logoo*/
+
+
+/*###############*/
+.txtUserForgot{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.txtUserForgot input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    margin-top: 0;
+    /*border: 1px solid;*/
+}
+
+.txtUserForgot span:before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    transition: .5s;
+    /*border: 1px solid #000;*/
+}
+
+.txtUserForgot span:after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    transition: .5s;
+}
+
+/*Chọn các phần từ span được đặt sau phần tử có class = `focus`*/
+.focus + span:before{
+    top: -25px;
+    /*border:1px solid red;*/
+}
+
+.focus + span:after {
+    width: 100%;
+}
+
+
+.blue-gradient{
+    border-radius: 0;
+    border: none;
+    /*background: #12c2e9;  !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  !* Chrome 10-25, Safari 5.1-6 *!*/
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.alert-danger{
+    width: 300px;
+    height: 30px;
+    margin-left: 8px;
+}
+
+.backward{
+    /*border: 1px solid;*/
+    /*background: #fff;*/
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.backward a{
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /*border: 1px solid yellow;*/
+}
