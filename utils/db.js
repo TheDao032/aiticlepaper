@@ -2,6 +2,15 @@ const mysql = require('mysql');
 const config = require('../config/default.json');
 
 const pool = mysql.createConnection(config.mysqlConnectionString);
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+ 
+  console.log('connected as id ' + connection.threadId);
+});
+// const pool = mysql.createPool(config.mysql);
 
 module.exports = {
   load: function (sql) {
