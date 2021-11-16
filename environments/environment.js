@@ -1,5 +1,5 @@
 const env = {
-  isUsingServerDB: false,
+  isUsingServerDB: true,
   mysqlConnectionString: process.env.JAWSDB_URL
 }
 

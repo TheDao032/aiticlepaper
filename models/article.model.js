@@ -81,9 +81,9 @@ module.exports = ({
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) ORDER BY a.datetime, a.idTOA DESC LIMIT ${limit} OFFSET ${offset}`),
     countByCat :(IDCat) =>db.load(`select count(*) as total from ${TBL_ARTICLE} a join category c on a.idCat = c.id WHERE c.id = ${IDCat} and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) `),
-    fullTextSearch :(search) =>db.load(`SELECT * from ${TBL_ARTICLE} a join category c on a.idCat = c.id WHERE MATCH(a.title,a.synopsis,a.content) against('${search}') and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
+    fullTextSearch :(search) =>db.load(`SELECT a.* from ${TBL_ARTICLE} a join category c on a.idCat = c.id WHERE MATCH(a.title,a.synopsis,a.content) against('${search}') and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1)`),
-    fullTextSearchPre :(search) =>db.load(`SELECT * from ${TBL_ARTICLE} a join category c on a.idCat = c.id WHERE MATCH(a.title,a.synopsis,a.content) against('${search}') and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
+    fullTextSearchPre :(search) =>db.load(`SELECT a.* from ${TBL_ARTICLE} a join category c on a.idCat = c.id WHERE MATCH(a.title,a.synopsis,a.content) against('${search}') and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) ORDER BY datetime, idTOA DESC`),
     newArticle: _ => db.load(`SELECT a.*, c.name as catName,  DATE_FORMAT(a.releaseTime, "%d-%m-%Y") as rT FROM ${TBL_ARTICLE} a join category c on a.idCat = c.id where a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) ORDER BY datetime DESC LIMIT 10`),

@@ -63,5 +63,5 @@ app.use(function(err, req, res, next) {
 })
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log(`Server is running at ${process.env.PORT}`);
+  console.log(`Server is running at ${process.env.PORT || 3000}`);
 })
