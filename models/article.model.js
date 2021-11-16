@@ -73,7 +73,7 @@ module.exports = ({
     getComtByID :(ID) =>db.load(`SELECT *, DATE_FORMAT(c.datetime, "%d-%m-%Y") as dt FROM comment c JOIN account a on c.idAcc = a.id WHERE c.idArt = ${ID} ORDER BY c.datetime DESC`),
     getListArtByIDCat :(IDCat,limit,offset) =>db.load(` SELECT * FROM article a join  category c on a.idCat = c.id where c.id = ${IDCat} and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) LIMIT ${limit} OFFSET ${offset}`),
-    getListArtByIDCatParent :(IDCat,limit,offset) =>db.load(` SELECT * FROM article a join  category c on a.idCat = c.id where c.idParent = ${IDCat} and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
+    getListArtByIDCatParent :(IDCat,limit,offset) =>db.load(` SELECT a.*, c.* FROM article a join  category c on a.idCat = c.id where c.idParent = ${IDCat} and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) LIMIT ${limit} OFFSET ${offset}`),
     getListArtByIDCatPre :(IDCat,limit,offset) =>db.load(` SELECT * FROM article a join  category c on a.idCat = c.id where c.id = ${IDCat} and a.idStatus = ${config.statusArticle.released} and a.isDelete = 0 and c.isDelete = 0 and c.idParent not in
     (select cc.id from category cc where cc.id = c.idParent and cc.isDelete = 1) ORDER BY a.datetime, a.idTOA DESC LIMIT ${limit} OFFSET ${offset}`),
